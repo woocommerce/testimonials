@@ -65,7 +65,12 @@ function woothemes_testimonials ( $args = '' ) {
 			$html .= '<div class="testimonials component' . $effect . '">' . "\n";
 			$html .= '<div class="testimonials-list">' . "\n";
 		
-			foreach ( $query as $post ) {
+			$count = 0;
+			foreach ( $query as $post ) { $count++;
+				$css_class = 'quote';
+				if ( 1 == $count ) { $css_class .= ' first'; }
+				if ( count( $query ) == $count ) { $css_class .= ' last'; }
+
 				setup_postdata( $post );
 				
 				$author = '';
@@ -90,15 +95,15 @@ function woothemes_testimonials ( $args = '' ) {
 					$author .= '</cite><!--/.author-->' . "\n";
 				}
 
-				$html .= '<div id="quote-' . esc_attr( $post->ID ) . '" class="quote">' . "\n";
-					$html .= '<blockquote class="testimonials-text">' . get_the_content() . '</blockquote>' . "\n";
-					
+				$html .= '<div id="quote-' . esc_attr( $post->ID ) . '" class="' . esc_attr( $css_class ) . '">' . "\n";
 					// Optionally display the image, if it is available.
 					if ( isset( $post->image ) && ( '' != $post->image ) ) {
 						$html .= '<a href="' . esc_url( $post->url ) . '" class="avatar-link">' . $post->image . '</a>';
 					}
-					
-					$html .= $author;
+					$html .= '<div class="quote-content">' . "\n";
+						$html .= '<blockquote class="testimonials-text">' . get_the_content() . '</blockquote>' . "\n";
+						$html .= $author;
+					$html .= '</div><!--/.quote-content-->' . "\n";
 					$html .= '<div class="fix"></div>' . "\n";
 				$html .= '</div>' . "\n";
 			}
@@ -111,7 +116,7 @@ function woothemes_testimonials ( $args = '' ) {
 		        $html .= '<a href="#" class="btn-next">' . apply_filters( 'woothemes_testimonials_next_btn', __( 'Next', 'woothemes-testimonials' ) . ' &rarr;' ) . '</a>' . "\n";
 		        $html .= '</div><!--/.pagination-->' . "\n";
 			}
-			
+				$html .= '<div class="fix"></div>' . "\n";
 			$html .= '</div><!--/.testimonials-->' . "\n";
 		}
 		
