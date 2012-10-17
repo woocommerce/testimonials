@@ -62,7 +62,7 @@ function woothemes_testimonials ( $args = '' ) {
 				$effect = ' ' . $args['effect'];
 			}
 			
-			$html .= '<div class="testimonials' . $effect . '">' . "\n";
+			$html .= '<div class="testimonials component' . $effect . '">' . "\n";
 			$html .= '<div class="testimonials-list">' . "\n";
 		
 			foreach ( $query as $post ) {
