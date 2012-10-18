@@ -71,6 +71,10 @@ function woothemes_testimonials ( $args = '' ) {
 
 			$html .= '<div class="testimonials-list">' . "\n";
 		
+			// Begin templating logic.
+			$template = '<div id="quote-%%ID%%" class="%%CLASS%%"><blockquote class="testimonials-text">%%TEXT%%</blockquote>%%AVATAR%% %%AUTHOR%%<div class="fix"></div></div>';
+			$template = apply_filters( 'woothemes_testimonials_item_template', $template, $args );
+
 			$count = 0;
 			foreach ( $query as $post ) { $count++;
 				$css_class = 'quote';
@@ -99,19 +103,25 @@ function woothemes_testimonials ( $args = '' ) {
 					}
 					
 					$author .= '</cite><!--/.author-->' . "\n";
+
+					// Templating engine replacement.
+					$template = str_replace( '%%AUTHOR%%', $author, $template );
+				} else {
+					$template = str_replace( '%%AUTHOR%%', '', $template );
 				}
 
-				$html .= '<div id="quote-' . esc_attr( $post->ID ) . '" class="' . esc_attr( $css_class ) . '">' . "\n";
-					// Optionally display the image, if it is available.
-					if ( isset( $post->image ) && ( '' != $post->image ) ) {
-						$html .= '<a href="' . esc_url( $post->url ) . '" class="avatar-link">' . $post->image . '</a>';
-					}
-					$html .= '<div class="quote-content">' . "\n";
-						$html .= '<blockquote class="testimonials-text">' . get_the_content() . '</blockquote>' . "\n";
-						$html .= $author;
-					$html .= '</div><!--/.quote-content-->' . "\n";
-					$html .= '<div class="fix"></div>' . "\n";
-				$html .= '</div>' . "\n";
+				// Templating logic replacement.
+				$template = str_replace( '%%ID%%', get_the_ID(), $template );
+				$template = str_replace( '%%CLASS%%', esc_attr( $css_class ), $template );
+
+				if ( isset( $post->image ) && ( '' != $post->image ) ) {
+					$template = str_replace( '%%AVATAR%%', '<a href="' . esc_url( $post->url ) . '" class="avatar-link">' . $post->image . '</a>', $template );
+				}
+
+				$template = str_replace( '%%TEXT%%', get_the_content(), $template );
+
+				// Assign for output.
+				$html .= $template;
 			}
 			
 			$html .= '</div><!--/.testimonials-list-->' . "\n";
