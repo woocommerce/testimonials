@@ -67,16 +67,16 @@ class WooThemes_Widget_Testmonials extends WP_Widget {
 		$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base );
 			
 		/* Before widget (defined by themes). */
-		echo $before_widget;
+		// echo $before_widget;
+
+		$args = array();
 
 		/* Display the widget title if one was input (before and after defined by themes). */
-		if ( $title ) { echo $before_title . $title . $after_title; }
+		if ( $title ) { $args['title'] = $title; }
 		
 		/* Widget content. */
 		// Add actions for plugins/themes to hook onto.
 		do_action( $this->woothemes_widget_cssclass . '_top' );
-		
-		$args = array();
 
 		// Integer values.
 		if ( isset( $instance['limit'] ) && ( 0 < count( $instance['limit'] ) ) ) { $args['limit'] = intval( $instance['limit'] ); }
@@ -98,7 +98,7 @@ class WooThemes_Widget_Testmonials extends WP_Widget {
 		do_action( $this->woothemes_widget_cssclass . '_bottom' );
 
 		/* After widget (defined by themes). */
-		echo $after_widget;
+		// echo $after_widget;
 
 	} // End widget()
 

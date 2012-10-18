@@ -63,6 +63,7 @@ function woothemes_testimonials ( $args = '' ) {
 				$effect = ' ' . $args['effect'];
 			}
 			
+			$html .= '<div class="widget widget_woothemes_testimonials">' . "\n";
 			$html .= '<div class="testimonials component' . $effect . '">' . "\n";
 
 			if ( '' != $args['title'] ) {
@@ -72,11 +73,13 @@ function woothemes_testimonials ( $args = '' ) {
 			$html .= '<div class="testimonials-list">' . "\n";
 		
 			// Begin templating logic.
-			$template = '<div id="quote-%%ID%%" class="%%CLASS%%"><blockquote class="testimonials-text">%%TEXT%%</blockquote>%%AVATAR%% %%AUTHOR%%<div class="fix"></div></div>';
-			$template = apply_filters( 'woothemes_testimonials_item_template', $template, $args );
+			$tpl = '<div id="quote-%%ID%%" class="%%CLASS%%"><blockquote class="testimonials-text">%%TEXT%%</blockquote>%%AVATAR%% %%AUTHOR%%<div class="fix"></div></div>';
+			$tpl = apply_filters( 'woothemes_testimonials_item_template', $tpl, $args );
 
 			$count = 0;
 			foreach ( $query as $post ) { $count++;
+				$template = $tpl;
+
 				$css_class = 'quote';
 				if ( 1 == $count ) { $css_class .= ' first'; }
 				if ( count( $query ) == $count ) { $css_class .= ' last'; }
@@ -134,6 +137,7 @@ function woothemes_testimonials ( $args = '' ) {
 			}
 				$html .= '<div class="fix"></div>' . "\n";
 			$html .= '</div><!--/.testimonials-->' . "\n";
+			$html .= '</div>' . "\n";
 		}
 		
 		// Allow child themes/plugins to filter here.
