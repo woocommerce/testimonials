@@ -41,7 +41,8 @@ function woothemes_testimonials ( $args = '' ) {
 		'effect' => 'fade', // Options: 'fade', 'none'
 		'pagination' => false, 
 		'echo' => true, 
-		'size' => 50
+		'size' => 50, 
+		'title' => ''
 	);
 	
 	$args = wp_parse_args( $args, $defaults );
@@ -63,6 +64,11 @@ function woothemes_testimonials ( $args = '' ) {
 			}
 			
 			$html .= '<div class="testimonials component' . $effect . '">' . "\n";
+
+			if ( '' != $args['title'] ) {
+				$html .= '<h2>' . esc_html( $args['title'] ) . '</h2>' . "\n";
+			}
+
 			$html .= '<div class="testimonials-list">' . "\n";
 		
 			$count = 0;
@@ -84,7 +90,7 @@ function woothemes_testimonials ( $args = '' ) {
 
 					$author .= $author_name;
 
-					if ( isset( $meta['_byline'] ) && '' != $post->byline ) {
+					if ( isset( $post->byline ) && '' != $post->byline ) {
 						$author .= ' <span class="excerpt">' . $post->byline . '</span><!--/.excerpt-->' . "\n";
 					}
 
