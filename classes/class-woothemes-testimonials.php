@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
  * @author Matty
  * @since 1.0.0
  */
-class WooThemes_Testimonials {
+class Woothemes_Testimonials {
 	private $dir;
 	private $assets_dir;
 	private $assets_url;

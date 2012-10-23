@@ -17,5 +17,5 @@ require_once( 'classes/class-woothemes-testimonials.php' );
 require_once( 'woothemes-testimonials-template.php' );
 require_once( 'classes/class-woothemes-widget-testimonials.php' );
 global $woothemes_testimonials;
-$woothemes_testimonials = new WooThemes_Testimonials( __FILE__ );
+$woothemes_testimonials = new Woothemes_Testimonials( __FILE__ );
 ?>
