@@ -85,6 +85,7 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
 
 		// Boolean values.
 		if ( isset( $instance['display_author'] ) && ( 1 == $instance['display_author'] ) ) { $args['display_author'] = true; } else { $args['display_author'] = false; }
+		if ( isset( $instance['display_avatar'] ) && ( 1 == $instance['display_avatar'] ) ) { $args['display_avatar'] = true; } else { $args['display_avatar'] = false; }
 		if ( isset( $instance['display_url'] ) && ( 1 == $instance['display_url'] ) ) { $args['display_url'] = true; } else { $args['display_url'] = false; }
 
 		// Select boxes.
@@ -126,6 +127,7 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
 
 		/* The checkbox is returning a Boolean (true/false), so we check for that. */
 		$instance['display_author'] = (bool) esc_attr( $new_instance['display_author'] );
+		$instance['display_avatar'] = (bool) esc_attr( $new_instance['display_avatar'] );
 		$instance['display_url'] = (bool) esc_attr( $new_instance['display_url'] );
 
 		return $instance;
@@ -149,6 +151,7 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
 			'order' => 'DESC', 
 			'specific_id' => '', 
 			'display_author' => true, 
+			'display_avatar' => true, 
 			'display_url' => true, 
 			'effect' => 'fade', // Options: 'fade', 'none'
 			'pagination' => false, 
@@ -194,6 +197,11 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
        	<p>
         	<input id="<?php echo $this->get_field_id( 'display_author' ); ?>" name="<?php echo $this->get_field_name( 'display_author' ); ?>" type="checkbox"<?php checked( $instance['display_author'], 1 ); ?> />
         	<label for="<?php echo $this->get_field_id( 'display_author' ); ?>"><?php _e( 'Display Author', 'woothemes-testimonials' ); ?></label>
+	   	</p>
+		<!-- Widget Display Avatar: Checkbox Input -->
+       	<p>
+        	<input id="<?php echo $this->get_field_id( 'display_avatar' ); ?>" name="<?php echo $this->get_field_name( 'display_avatar' ); ?>" type="checkbox"<?php checked( $instance['display_avatar'], 1 ); ?> />
+        	<label for="<?php echo $this->get_field_id( 'display_avatar' ); ?>"><?php _e( 'Display Avatar', 'woothemes-testimonials' ); ?></label>
 	   	</p>
 	   	<!-- Widget Display URL: Checkbox Input -->
        	<p>
