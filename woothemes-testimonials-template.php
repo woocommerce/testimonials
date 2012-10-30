@@ -117,8 +117,10 @@ function woothemes_testimonials ( $args = '' ) {
 				$template = str_replace( '%%ID%%', get_the_ID(), $template );
 				$template = str_replace( '%%CLASS%%', esc_attr( $css_class ), $template );
 
-				if ( isset( $post->image ) && ( '' != $post->image ) ) {
+				if ( isset( $post->image ) && ( '' != $post->image ) && true == $args['display_avatar'] ) {
 					$template = str_replace( '%%AVATAR%%', '<a href="' . esc_url( $post->url ) . '" class="avatar-link">' . $post->image . '</a>', $template );
+				} else {
+					$template = str_replace( '%%AVATAR%%', '', $template );
 				}
 
 				$template = str_replace( '%%TEXT%%', get_the_content(), $template );
