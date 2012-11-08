@@ -4,7 +4,7 @@ Donate link: http://woothemes.com/
 Tags: testimonials, widget, shortcode, template-tag, feedback, customers
 Requires at least: 3.4.2
 Tested up to: 3.5-beta2
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Show off what your customers are saying about your business and how great they s
 
 "Testimonials by WooThemes" is a clean and easy-to-use testimonials management system for WordPress. Load in what your customers are saying about your business, and display the testimonials via a shortcode, widget or template tag on your website.
 
-=== Usage ===
+== Usage ==
 
 To display your testimonials via a theme or a custom plugin, please use the following code:
 
@@ -27,6 +27,7 @@ To add arguments to this, please use any of the following arguments, using the s
 * 'order' => 'DESC' (the order direction)
 * 'id' => 0 (display a specific item)
 * 'display_author' => true (whether or not to display the author information)
+* 'display_avatar' => true (whether or not to display the author avatar)
 * 'display_url' => true (whether or not to display the URL information)
 * 'echo' => true (whether to display or return the data - useful with the template tag)
 * 'size' => 50 (the pixel dimensions of the image)
@@ -61,10 +62,19 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Upgrade Notice ==
 
+= 1.1.0 =
+* Added avatar display options and performed routine plugin maintenance.
+
 = 1.0.0 =
 * Initial release. Woo!
 
 == Changelog ==
 
+= 1.1.0 =
+* 2012-11-08
+* Added option to display or hide the avatar.
+* Fixed bug where %%AVATAR%% tag was displaying if no avatar image was available for a testimonial.
+
 = 1.0.0 =
+* 2012-10-23
 * Initial release. Woo!

@@ -37,6 +37,7 @@ function woothemes_testimonials ( $args = '' ) {
 		'order' => 'DESC', 
 		'id' => 0, 
 		'display_author' => true, 
+		'display_avatar' => true, 
 		'display_url' => true, 
 		'effect' => 'fade', // Options: 'fade', 'none'
 		'pagination' => false, 
@@ -123,6 +124,9 @@ function woothemes_testimonials ( $args = '' ) {
 					$template = str_replace( '%%AVATAR%%', '', $template );
 				}
 
+				// Remove any remaining %%AVATAR%% template tags.
+				$template = str_replace( '%%AVATAR%%', '', $template );
+
 				$template = str_replace( '%%TEXT%%', get_the_content(), $template );
 
 				// Assign for output.
@@ -164,6 +168,7 @@ function woothemes_testimonials_shortcode ( $atts, $content = null ) {
 		'order' => 'DESC', 
 		'id' => 0, 
 		'display_author' => true, 
+		'display_avatar' => true, 
 		'display_url' => true, 
 		'effect' => 'fade', // Options: 'fade', 'none'
 		'pagination' => false, 
@@ -182,7 +187,7 @@ function woothemes_testimonials_shortcode ( $atts, $content = null ) {
 	if ( isset( $args['size'] ) &&  ( 0 < intval( $args['size'] ) ) ) $args['size'] = intval( $args['size'] );
 
 	// Fix booleans.
-	foreach ( array( 'display_author', 'display_url', 'pagination' ) as $k => $v ) {
+	foreach ( array( 'display_author', 'display_url', 'pagination', 'display_avatar' ) as $k => $v ) {
 		if ( isset( $args[$v] ) && ( 'true' == $args[$v] ) ) {
 			$args[$v] = true;
 		} else {
