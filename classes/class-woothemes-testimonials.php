@@ -96,7 +96,7 @@ class Woothemes_Testimonials {
 			'query_var' => true,
 			'rewrite' => array( 'slug' => 'testimonial' ),
 			'capability_type' => 'post',
-			'has_archive' => array( 'slug' => 'testimonials' ),
+			'has_archive' => 'testimonials',
 			'hierarchical' => false,
 			'supports' => array( 'title', 'editor', 'thumbnail', 'page-attributes' ), 
 			'menu_position' => 5, 
