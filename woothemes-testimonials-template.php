@@ -43,7 +43,11 @@ function woothemes_testimonials ( $args = '' ) {
 		'pagination' => false, 
 		'echo' => true, 
 		'size' => 50, 
-		'title' => ''
+		'title' => '', 
+		'before' => '<div class="widget widget_woothemes_testimonials">', 
+		'after' => '</div>', 
+		'before_title' => '<h2>', 
+		'after_title' => '</h2>'
 	);
 	
 	$args = wp_parse_args( $args, $defaults );
@@ -64,12 +68,11 @@ function woothemes_testimonials ( $args = '' ) {
 				$effect = ' ' . $args['effect'];
 			}
 			
-			$html .= '<div class="widget widget_woothemes_testimonials">' . "\n";
-			$html .= '<div class="testimonials component' . $effect . '">' . "\n";
-
+			$html .= $args['before'] . "\n";
 			if ( '' != $args['title'] ) {
-				$html .= '<h2>' . esc_html( $args['title'] ) . '</h2>' . "\n";
+				$html .= $args['before_title'] . esc_html( $args['title'] ) . $args['after_title'] . "\n";
 			}
+			$html .= '<div class="testimonials component' . $effect . '">' . "\n";
 
 			$html .= '<div class="testimonials-list">' . "\n";
 		
@@ -132,6 +135,8 @@ function woothemes_testimonials ( $args = '' ) {
 				// Assign for output.
 				$html .= $template;
 			}
+
+			wp_reset_postdata();
 			
 			$html .= '</div><!--/.testimonials-list-->' . "\n";
 			
@@ -143,7 +148,7 @@ function woothemes_testimonials ( $args = '' ) {
 			}
 				$html .= '<div class="fix"></div>' . "\n";
 			$html .= '</div><!--/.testimonials-->' . "\n";
-			$html .= '</div>' . "\n";
+			$html .= $args['after'] . "\n";
 		}
 		
 		// Allow child themes/plugins to filter here.

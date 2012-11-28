@@ -31,7 +31,7 @@ class Woothemes_Testimonials {
 		$this->dir = dirname( $file );
 		$this->file = $file;
 		$this->assets_dir = trailingslashit( $this->dir ) . 'assets';
-		$this->assets_url = esc_url( str_replace( WP_PLUGIN_DIR, WP_PLUGIN_URL, $this->assets_dir ) );
+		$this->assets_url = esc_url( trailingslashit( plugins_url( '/assets/', $file ) ) );
 		$this->token = 'testimonial';
 
 		$this->load_plugin_textdomain();
@@ -96,7 +96,7 @@ class Woothemes_Testimonials {
 			'query_var' => true,
 			'rewrite' => array( 'slug' => 'testimonial' ),
 			'capability_type' => 'post',
-			'has_archive' => array( 'slug' => 'testimonials' ),
+			'has_archive' => 'testimonials',
 			'hierarchical' => false,
 			'supports' => array( 'title', 'editor', 'thumbnail', 'page-attributes' ), 
 			'menu_position' => 5, 
@@ -408,6 +408,7 @@ class Woothemes_Testimonials {
 		$query_args['numberposts'] = $args['limit'];
 		$query_args['orderby'] = $args['orderby'];
 		$query_args['order'] = $args['order'];
+		$query_args['suppress_filters'] = false;
 		
 		if ( is_numeric( $args['id'] ) && ( intval( $args['id'] ) > 0 ) ) {
 			$query_args['p'] = intval( $args['id'] );
