@@ -366,8 +366,8 @@ class Woothemes_Testimonials {
 		$response = '';
 
 		if ( has_post_thumbnail( $id ) ) {
-			// If not a string or an array, and not an integer, default to 50x50.
-			if ( is_int( $size ) || ( 0 < intval( $size ) ) ) {
+			// If not a string or an array, and not an integer, default to 150x9999.
+			if ( ( is_int( $size ) || ( 0 < intval( $size ) ) ) && ! is_array( $size ) ) {
 				$size = array( intval( $size ), intval( $size ) );
 			} elseif ( ! is_string( $size ) && ! is_array( $size ) ) {
 				$size = array( 50, 50 );

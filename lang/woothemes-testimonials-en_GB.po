@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Testimonials v1.2.0\n"
+"Project-Id-Version: Testimonials v1.2.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-11-28 09:51:33+0000\n"
+"PO-Revision-Date: 2013-01-03 08:54:32+0000\n"
 "Last-Translator: Matty <matt@woothemes.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -286,12 +286,12 @@ msgstr ""
 msgid "Specified Order Setting"
 msgstr ""
 
-#: classes/class-woothemes-widget-testimonials.php:243
+#: classes/class-woothemes-widget-testimonials.php:244
 #@ woothemes-testimonials
 msgid "Ascending"
 msgstr ""
 
-#: classes/class-woothemes-widget-testimonials.php:244
+#: classes/class-woothemes-widget-testimonials.php:245
 #@ woothemes-testimonials
 msgid "Descending"
 msgstr ""
@@ -309,5 +309,10 @@ msgstr ""
 #: classes/class-woothemes-widget-testimonials.php:205
 #@ woothemes-testimonials
 msgid "Display Avatar"
+msgstr ""
+
+#: classes/class-woothemes-widget-testimonials.php:233
+#@ woothemes-testimonials
+msgid "Random Order"
 msgstr ""
 

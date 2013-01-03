@@ -229,7 +229,8 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
 					'ID' => __( 'Entry ID', 'woothemes-testimonials' ), 
 					'title' => __( 'Title', 'woothemes-testimonials' ), 
 					'date' => __( 'Date Added', 'woothemes-testimonials' ), 
-					'menu_order' => __( 'Specified Order Setting', 'woothemes-testimonials' )
+					'menu_order' => __( 'Specified Order Setting', 'woothemes-testimonials' ), 
+					'rand' => __( 'Random Order', 'woothemes-testimonials' )
 					);
 	} // End get_orderby_options()
 
@@ -240,8 +241,8 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
 	 */
 	protected function get_order_options () {
 		return array(
-					'asc' => __( 'Ascending', 'woothemes-testimonials' ), 
-					'desc' => __( 'Descending', 'woothemes-testimonials' )
+					'ASC' => __( 'Ascending', 'woothemes-testimonials' ), 
+					'DESC' => __( 'Descending', 'woothemes-testimonials' )
 					);
 	} // End get_order_options()
 } // End Class
