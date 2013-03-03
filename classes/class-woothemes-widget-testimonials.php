@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) || ! function_exists( 'woothemes_testimonials' ) ) e
  * - form()
  * - get_orderby_options()
  */
-class Woothemes_Widget_Testmonials extends WP_Widget {
+class Woothemes_Widget_Testimonials extends WP_Widget {
 	protected $woothemes_widget_cssclass;
 	protected $woothemes_widget_description;
 	protected $woothemes_widget_idbase;
@@ -248,5 +248,5 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
 } // End Class
 
 /* Register the widget. */
-add_action( 'widgets_init', create_function( '', 'return register_widget("Woothemes_Widget_Testmonials");' ), 1 ); 
+add_action( 'widgets_init', create_function( '', 'return register_widget("Woothemes_Widget_Testimonials");' ), 1 ); 
 ?>
