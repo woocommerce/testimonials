@@ -18,14 +18,14 @@ if ( ! defined( 'ABSPATH' ) || ! function_exists( 'woothemes_testimonials' ) ) e
  * protected $woothemes_widget_description
  * protected $woothemes_widget_idbase
  * protected $woothemes_widget_title
- * 
+ *
  * - __construct()
  * - widget()
  * - update()
  * - form()
  * - get_orderby_options()
  */
-class Woothemes_Widget_Testmonials extends WP_Widget {
+class Woothemes_Widget_Testimonials extends WP_Widget {
 	protected $woothemes_widget_cssclass;
 	protected $woothemes_widget_description;
 	protected $woothemes_widget_idbase;
@@ -50,7 +50,7 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
 		$control_ops = array( 'width' => 250, 'height' => 350, 'id_base' => $this->woothemes_widget_idbase );
 
 		/* Create the widget. */
-		$this->WP_Widget( $this->woothemes_widget_idbase, $this->woothemes_widget_title, $widget_ops, $control_ops );	
+		$this->WP_Widget( $this->woothemes_widget_idbase, $this->woothemes_widget_title, $widget_ops, $control_ops );
 	} // End __construct()
 
 	/**
@@ -60,12 +60,12 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
 	 * @param  array $instance Widget settings for this instance.
 	 * @return void
 	 */
-	public function widget( $args, $instance ) {  
+	public function widget( $args, $instance ) {
 		extract( $args, EXTR_SKIP );
-		
+
 		/* Our variables from the widget settings. */
 		$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base );
-			
+
 		/* Before widget (defined by themes). */
 		$args = array();
 
@@ -78,7 +78,7 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
 			$args['title'] = $title;
 			$args['after_title'] = $after_title;
 		}
-		
+
 		/* Widget content. */
 		// Add actions for plugins/themes to hook onto.
 		do_action( $this->woothemes_widget_cssclass . '_top' );
@@ -87,6 +87,7 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
 		if ( isset( $instance['limit'] ) && ( 0 < count( $instance['limit'] ) ) ) { $args['limit'] = intval( $instance['limit'] ); }
 		if ( isset( $instance['specific_id'] ) && ( 0 < count( $instance['specific_id'] ) ) ) { $args['id'] = intval( $instance['specific_id'] ); }
 		if ( isset( $instance['size'] ) && ( 0 < count( $instance['size'] ) ) ) { $args['size'] = intval( $instance['size'] ); }
+		if ( isset( $instance['category'] ) && is_numeric( $instance['category'] ) ) $args['category'] = intval( $instance['category'] );
 
 		// Boolean values.
 		if ( isset( $instance['display_author'] ) && ( 1 == $instance['display_author'] ) ) { $args['display_author'] = true; } else { $args['display_author'] = false; }
@@ -121,6 +122,7 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
 		$instance['limit'] = intval( $new_instance['limit'] );
 		$instance['specific_id'] = intval( $new_instance['specific_id'] );
 		$instance['size'] = intval( $new_instance['size'] );
+		$instance['category'] = intval( $new_instance['category'] );
 
 		/* The select box is returning a text value, so we escape it. */
 		$instance['orderby'] = esc_attr( $new_instance['orderby'] );
@@ -141,24 +143,25 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
 	 * @param  array $instance The settings for this instance.
 	 * @return void
 	 */
-    public function form( $instance ) {       
-   
+    public function form( $instance ) {
+
 		/* Set up some default widget settings. */
 		/* Make sure all keys are added here, even with empty string values. */
 		$defaults = array(
-			'title' => '', 
-			'limit' => 5, 
-			'orderby' => 'menu_order', 
-			'order' => 'DESC', 
-			'specific_id' => '', 
-			'display_author' => true, 
-			'display_avatar' => true, 
-			'display_url' => true, 
+			'title' => '',
+			'limit' => 5,
+			'orderby' => 'menu_order',
+			'order' => 'DESC',
+			'specific_id' => '',
+			'display_author' => true,
+			'display_avatar' => true,
+			'display_url' => true,
 			'effect' => 'fade', // Options: 'fade', 'none'
-			'pagination' => false, 
-			'size' => 50
+			'pagination' => false,
+			'size' => 50,
+			'category' => 0
 		);
-		
+
 		$instance = wp_parse_args( (array) $instance, $defaults );
 ?>
 		<!-- Widget Title: Text Input -->
@@ -182,7 +185,7 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
 			<select name="<?php echo $this->get_field_name( 'orderby' ); ?>" class="widefat" id="<?php echo $this->get_field_id( 'orderby' ); ?>">
 			<?php foreach ( $this->get_orderby_options() as $k => $v ) { ?>
 				<option value="<?php echo $k; ?>"<?php selected( $instance['orderby'], $k ); ?>><?php echo $v; ?></option>
-			<?php } ?>       
+			<?php } ?>
 			</select>
 		</p>
 		<!-- Widget Order: Select Input -->
@@ -191,7 +194,7 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
 			<select name="<?php echo $this->get_field_name( 'order' ); ?>" class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>">
 			<?php foreach ( $this->get_order_options() as $k => $v ) { ?>
 				<option value="<?php echo $k; ?>"<?php selected( $instance['order'], $k ); ?>><?php echo $v; ?></option>
-			<?php } ?>       
+			<?php } ?>
 			</select>
 		</p>
 		<!-- Widget Display Author: Checkbox Input -->
@@ -209,6 +212,14 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
         	<input id="<?php echo $this->get_field_id( 'display_url' ); ?>" name="<?php echo $this->get_field_name( 'display_url' ); ?>" type="checkbox"<?php checked( $instance['display_url'], 1 ); ?> />
         	<label for="<?php echo $this->get_field_id( 'display_url' ); ?>"><?php _e( 'Display URL', 'woothemes-testimonials' ); ?></label>
 	   	</p>
+	   	<!-- Widget Category: Select Input -->
+		<p>
+			<label for="<?php echo $this->get_field_id( 'category' ); ?>"><?php _e( 'Category:', 'woothemes-testimonials' ); ?></label>
+			<?php
+				$dropdown_args = array( 'taxonomy' => 'testimonial-category', 'class' => 'widefat', 'show_option_all' => __( 'All', 'woothemes-testimonials' ), 'id' => $this->get_field_id( 'category' ), 'name' => $this->get_field_name( 'category' ), 'selected' => $instance['category'] );
+				wp_dropdown_categories( $dropdown_args );
+			?>
+		</p>
 		<!-- Widget ID: Text Input -->
 		<p>
 			<label for="<?php echo $this->get_field_id( 'specific_id' ); ?>"><?php _e( 'Specific ID (optional):', 'woothemes-testimonials' ); ?></label>
@@ -225,11 +236,11 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
 	 */
 	protected function get_orderby_options () {
 		return array(
-					'none' => __( 'No Order', 'woothemes-testimonials' ), 
-					'ID' => __( 'Entry ID', 'woothemes-testimonials' ), 
-					'title' => __( 'Title', 'woothemes-testimonials' ), 
-					'date' => __( 'Date Added', 'woothemes-testimonials' ), 
-					'menu_order' => __( 'Specified Order Setting', 'woothemes-testimonials' ), 
+					'none' => __( 'No Order', 'woothemes-testimonials' ),
+					'ID' => __( 'Entry ID', 'woothemes-testimonials' ),
+					'title' => __( 'Title', 'woothemes-testimonials' ),
+					'date' => __( 'Date Added', 'woothemes-testimonials' ),
+					'menu_order' => __( 'Specified Order Setting', 'woothemes-testimonials' ),
 					'rand' => __( 'Random Order', 'woothemes-testimonials' )
 					);
 	} // End get_orderby_options()
@@ -241,12 +252,12 @@ class Woothemes_Widget_Testmonials extends WP_Widget {
 	 */
 	protected function get_order_options () {
 		return array(
-					'ASC' => __( 'Ascending', 'woothemes-testimonials' ), 
+					'ASC' => __( 'Ascending', 'woothemes-testimonials' ),
 					'DESC' => __( 'Descending', 'woothemes-testimonials' )
 					);
 	} // End get_order_options()
 } // End Class
 
 /* Register the widget. */
-add_action( 'widgets_init', create_function( '', 'return register_widget("Woothemes_Widget_Testmonials");' ), 1 ); 
+add_action( 'widgets_init', create_function( '', 'return register_widget("Woothemes_Widget_Testimonials");' ), 1 );
 ?>

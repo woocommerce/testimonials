@@ -3,8 +3,8 @@ Contributors: woothemes, mattyza, jameskoster
 Donate link: http://woothemes.com/
 Tags: testimonials, widget, shortcode, template-tag, feedback, customers
 Requires at least: 3.4.2
-Tested up to: 3.5
-Stable tag: 1.2.1
+Tested up to: 3.5.1
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,7 @@ To add arguments to this, please use any of the following arguments, using the s
 * 'after' => '&lt;/div&gt;' (the ending HTML, wrapping the testimonials)
 * 'before_title' => '&lt;h2&gt;' (the starting HTML, wrapping the title)
 * 'after_title' => '&lt;/h2&gt;' (the ending HTML, wrapping the title)
+* 'category' => 0 (the ID/slug of the category to filter by)
 
 The various options for the "orderby" parameter are:
 
@@ -95,6 +96,9 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Upgrade Notice ==
 
+= 1.3.0 =
+* Adds "woothemes_testimonials_content" filter and shortcode support. Adds "testimonial-category" taxonomy.
+
 = 1.2.1 =
 * Minor bugfixes in the "order" directions options.
 * Adds support for random ordering in the widget.
@@ -111,6 +115,14 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * Initial release. Woo!
 
 == Changelog ==
+
+= 1.3.0 =
+* 2013-04-30.
+* Adds "woothemes_testimonials_content" filter for modifying the content of testimonials when outputting the testimonials list.
+* Adds default filters to the "woothemes_testimonials_content" hook, enabling shortcodes in the content field.
+* Adds "testimonial-category" taxonomy and necessary logic for displaying testimonials from a specified category.
+* Makes sure the ".avatar" CSS class is applied when using the featured image instead of a Gravatar.
+* Fixes typo in the widget's class name.
 
 = 1.2.1 =
 * 2013-01-03
