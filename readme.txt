@@ -4,7 +4,7 @@ Donate link: http://woothemes.com/
 Tags: testimonials, widget, shortcode, template-tag, feedback, customers
 Requires at least: 3.4.2
 Tested up to: 3.5.1
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,9 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Upgrade Notice ==
 
+= 1.3.1 =
+* Fixes bug where testimonial text doesn't display (incorrectly placed action hook).
+
 = 1.3.0 =
 * Adds "woothemes_testimonials_content" filter and shortcode support. Adds "testimonial-category" taxonomy.
 
@@ -115,6 +118,10 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * Initial release. Woo!
 
 == Changelog ==
+
+= 1.3.1 =
+* 2013-04-30.
+* Fixes bug where testimonial text doesn't display (incorrectly placed action hook).
 
 = 1.3.0 =
 * 2013-04-30.

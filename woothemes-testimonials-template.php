@@ -226,6 +226,6 @@ function woothemes_testimonials_content_default_filters () {
 	add_filter( 'woothemes_testimonials_content', 'do_shortcode' );
 } // End woothemes_testimonials_content_default_filters()
 
-add_action( 'woothemes_testimonials_content', 'woothemes_testimonials_content_default_filters' );
+add_action( 'woothemes_testimonials_before', 'woothemes_testimonials_content_default_filters' );
 }
 ?>
