@@ -35,30 +35,30 @@ class Woothemes_Testimonials {
 		$this->token = 'testimonial';
 
 		$this->load_plugin_textdomain();
-		add_action( 'init', array( &$this, 'load_localisation' ), 0 );
+		add_action( 'init', array( $this, 'load_localisation' ), 0 );
 
 		// Run this on activation.
-		register_activation_hook( $this->file, array( &$this, 'activation' ) );
+		register_activation_hook( $this->file, array( $this, 'activation' ) );
 
-		add_action( 'init', array( &$this, 'register_post_type' ) );
+		add_action( 'init', array( $this, 'register_post_type' ) );
 		add_action( 'init', array( $this, 'register_taxonomy' ) );
 
 		if ( is_admin() ) {
 			global $pagenow;
 
-			add_action( 'admin_menu', array( &$this, 'meta_box_setup' ), 20 );
-			add_action( 'save_post', array( &$this, 'meta_box_save' ) );
-			add_filter( 'enter_title_here', array( &$this, 'enter_title_here' ) );
-			add_action( 'admin_print_styles', array( &$this, 'enqueue_admin_styles' ), 10 );
-			add_filter( 'post_updated_messages', array( &$this, 'updated_messages' ) );
+			add_action( 'admin_menu', array( $this, 'meta_box_setup' ), 20 );
+			add_action( 'save_post', array( $this, 'meta_box_save' ) );
+			add_filter( 'enter_title_here', array( $this, 'enter_title_here' ) );
+			add_action( 'admin_print_styles', array( $this, 'enqueue_admin_styles' ), 10 );
+			add_filter( 'post_updated_messages', array( $this, 'updated_messages' ) );
 
 			if ( $pagenow == 'edit.php' && isset( $_GET['post_type'] ) && esc_attr( $_GET['post_type'] ) == $this->token ) {
-				add_filter( 'manage_edit-' . $this->token . '_columns', array( &$this, 'register_custom_column_headings' ), 10, 1 );
-				add_action( 'manage_posts_custom_column', array( &$this, 'register_custom_columns' ), 10, 2 );
+				add_filter( 'manage_edit-' . $this->token . '_columns', array( $this, 'register_custom_column_headings' ), 10, 1 );
+				add_action( 'manage_posts_custom_column', array( $this, 'register_custom_columns' ), 10, 2 );
 			}
 		}
 
-		add_action( 'after_setup_theme', array( &$this, 'ensure_post_thumbnails_support' ) );
+		add_action( 'after_setup_theme', array( $this, 'ensure_post_thumbnails_support' ) );
 	} // End __construct()
 
 	/**
@@ -216,7 +216,7 @@ class Woothemes_Testimonials {
 	 * @return void
 	 */
 	public function meta_box_setup () {
-		add_meta_box( 'testimonial-data', __( 'Testimonial Details', 'woothemes-testimonials' ), array( &$this, 'meta_box_content' ), $this->token, 'normal', 'high' );
+		add_meta_box( 'testimonial-data', __( 'Testimonial Details', 'woothemes-testimonials' ), array( $this, 'meta_box_content' ), $this->token, 'normal', 'high' );
 	} // End meta_box_setup()
 
 	/**
