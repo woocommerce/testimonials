@@ -88,6 +88,10 @@ class Woothemes_Testimonials {
 			'menu_name' => __( 'Testimonials', 'woothemes-testimonials' )
 
 		);
+
+		$single_slug = apply_filters( 'woothemes_testimonials_single_slug', _x( 'testimonial', 'single post url slug', 'woothemes-testimonials' ) );
+		$archive_slug = apply_filters( 'woothemes_testimonials_archive_slug', _x( 'testimonials', 'post archive url slug', 'woothemes-testimonials' ) );
+
 		$args = array(
 			'labels' => $labels,
 			'public' => true,
@@ -95,9 +99,9 @@ class Woothemes_Testimonials {
 			'show_ui' => true,
 			'show_in_menu' => true,
 			'query_var' => true,
-			'rewrite' => array( 'slug' => 'testimonial' ),
+			'rewrite' => array( 'slug' => $single_slug ),
 			'capability_type' => 'post',
-			'has_archive' => 'testimonials',
+			'has_archive' => $archive_slug,
 			'hierarchical' => false,
 			'supports' => array( 'title', 'editor', 'thumbnail', 'page-attributes' ),
 			'menu_position' => 5,
@@ -517,6 +521,7 @@ class Woothemes_Testimonials {
 	 */
 	public function activation () {
 		$this->register_plugin_version();
+		$this->flush_rewrite_rules();
 	} // End activation()
 
 	/**
@@ -530,6 +535,17 @@ class Woothemes_Testimonials {
 			update_option( 'woothemes-testimonials' . '-version', $this->version );
 		}
 	} // End register_plugin_version()
+
+	/**
+	 * Flush the rewrite rules
+	 * @access public
+	 * @since 1.3.2
+	 * @return void
+	 */
+	private function flush_rewrite_rules () {
+		$this->register_post_type();
+		flush_rewrite_rules();
+	} // End flush_rewrite_rules()
 
 	/**
 	 * Ensure that "post-thumbnails" support is available for those themes that don't register it.
