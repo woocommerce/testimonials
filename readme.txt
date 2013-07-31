@@ -1,10 +1,10 @@
 === Testimonials by WooThemes ===
-Contributors: woothemes, mattyza, jameskoster
+Contributors: woothemes, mattyza, jameskoster, hlashbrooke
 Donate link: http://woothemes.com/
 Tags: testimonials, widget, shortcode, template-tag, feedback, customers
 Requires at least: 3.4.2
-Tested up to: 3.5.1
-Stable tag: 1.3.1
+Tested up to: 3.5.2
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,10 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Upgrade Notice ==
 
+= 1.3.2 =
+* Adds filters for the single testimonials and testimonial archives URL slugs
+* Adds a flush_rewrite_rules() call on plugin activation
+
 = 1.3.1 =
 * Fixes bug where testimonial text doesn't display (incorrectly placed action hook).
 
@@ -118,6 +122,12 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * Initial release. Woo!
 
 == Changelog ==
+
+= 1.3.2 =
+* 2013-08-01.
+* Adds "woothemes_testimonials_single_slug" as a filter for the single testimonials URL slug
+* Adds "woothemes_testimonials_archive_slug" as a filter for the testimonials archive URL slug
+* Adds a flush_rewrite_rules() call on plugin activation
 
 = 1.3.1 =
 * 2013-04-30.
