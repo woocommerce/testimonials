@@ -95,7 +95,7 @@ class Woothemes_Testimonials {
 			'show_ui' => true,
 			'show_in_menu' => true,
 			'query_var' => true,
-			'rewrite' => array( 'slug' => 'testimonial' ),
+			'rewrite' => array( 'slug' => 'testimonial', 'with_front' => false ),
 			'capability_type' => 'post',
 			'has_archive' => 'testimonials',
 			'hierarchical' => false,
