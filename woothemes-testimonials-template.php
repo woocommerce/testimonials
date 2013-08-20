@@ -66,7 +66,7 @@ function woothemes_testimonials ( $args = '' ) {
 		if ( ! is_wp_error( $query ) && is_array( $query ) && count( $query ) > 0 ) {
 
 			if ( $args['effect'] != 'none' ) {
-				$effect = ' ' . $args['effect'];
+				$effect = ' effect-' . $args['effect'];
 			}
 
 			$html .= $args['before'] . "\n";
