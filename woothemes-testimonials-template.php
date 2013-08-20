@@ -33,6 +33,7 @@ function woothemes_testimonials ( $args = '' ) {
 
 	$defaults = array(
 		'limit' => 5,
+		'per_row' => null,
 		'orderby' => 'menu_order',
 		'order' => 'DESC',
 		'id' => 0,
@@ -65,15 +66,21 @@ function woothemes_testimonials ( $args = '' ) {
 		// The Display.
 		if ( ! is_wp_error( $query ) && is_array( $query ) && count( $query ) > 0 ) {
 
-			if ( $args['effect'] != 'none' ) {
-				$effect = ' effect-' . $args['effect'];
+			$class = '';
+
+			if ( is_numeric( $args['per_row'] ) ) {
+				$class .= ' columns-' . intval( $args['per_row'] );
+			}
+
+			if ( 'none' != $args['effect'] ) {
+				$class .= ' effect-' . $args['effect'];
 			}
 
 			$html .= $args['before'] . "\n";
 			if ( '' != $args['title'] ) {
 				$html .= $args['before_title'] . esc_html( $args['title'] ) . $args['after_title'] . "\n";
 			}
-			$html .= '<div class="testimonials component' . esc_attr( $effect ) . '">' . "\n";
+			$html .= '<div class="testimonials component' . esc_attr( $class ) . '">' . "\n";
 
 			$html .= '<div class="testimonials-list">' . "\n";
 
@@ -87,7 +94,7 @@ function woothemes_testimonials ( $args = '' ) {
 
 				$css_class = 'quote';
 				if ( 1 == $count ) { $css_class .= ' first'; }
-				if ( count( $query ) == $count ) { $css_class .= ' last'; }
+				if ( $per_row == $count || count( $query ) == $count ) { $css_class .= ' last'; }
 
 				setup_postdata( $post );
 
@@ -177,6 +184,7 @@ function woothemes_testimonials_shortcode ( $atts, $content = null ) {
 
 	$defaults = array(
 		'limit' => 5,
+		'per_row' => null,
 		'orderby' => 'menu_order',
 		'order' => 'DESC',
 		'id' => 0,
