@@ -197,7 +197,6 @@ function woothemes_testimonials_shortcode ( $atts, $content = null ) {
 
 	// Fix integers.
 	if ( isset( $args['limit'] ) ) $args['limit'] = intval( $args['limit'] );
-	if ( isset( $args['id'] ) ) $args['id'] = intval( $args['id'] );
 	if ( isset( $args['size'] ) &&  ( 0 < intval( $args['size'] ) ) ) $args['size'] = intval( $args['size'] );
 	if ( isset( $args['category'] ) && is_numeric( $args['category'] ) ) $args['category'] = intval( $args['category'] );
 
