@@ -96,6 +96,11 @@ function woothemes_testimonials ( $args = '' ) {
 				if ( 1 == $count ) { $css_class .= ' first'; }
 				if ( $per_row == $count || count( $query ) == $count ) { $css_class .= ' last'; }
 
+				// Add a CSS class if no image is available.
+				if ( isset( $post->image ) && ( '' == $post->image ) ) {
+					$css_class .= ' no-image';
+				}
+
 				setup_postdata( $post );
 
 				$author = '';
