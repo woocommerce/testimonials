@@ -1,10 +1,10 @@
 === Testimonials by WooThemes ===
-Contributors: woothemes, mattyza, jameskoster, hlashbrooke
+Contributors: woothemes, mattyza, jameskoster
 Donate link: http://woothemes.com/
 Tags: testimonials, widget, shortcode, template-tag, feedback, customers
 Requires at least: 3.4.2
-Tested up to: 3.5.2
-Stable tag: 1.3.2
+Tested up to: 3.6.0
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,10 +14,10 @@ Show off what your customers are saying about your business and how great they s
 
 "Testimonials by WooThemes" is a clean and easy-to-use testimonials management system for WordPress. Load in what your customers are saying about your business, and display the testimonials via a shortcode, widget or template tag on your website.
 
-Looking for a helping hand? [View plugin documentation](http://wordpress.org/extend/plugins/testimonials-by-woothemes/other_notes/).
+Looking for a helping hand? [View plugin documentation](http://wordpress.org/plugins/testimonials-by-woothemes/other_notes/).
 
 Looking to contribute code to this plugin? [Fork the repository over at GitHub](http://github.com/woothemes/testimonials/).
-(submit pull requests to the "develop" branch)
+(submit pull requests to the latest "release-" branch)
 
 == Usage ==
 
@@ -28,6 +28,7 @@ To display your testimonials via a theme or a custom plugin, please use the foll
 To add arguments to this, please use any of the following arguments, using the syntax provided below:
 
 * 'limit' => 5 (the maximum number of items to display)
+* 'per_row' => 3 (when creating rows, how many items display in a single row?)
 * 'orderby' => 'menu_order' (how to order the items - accepts all default WordPress ordering options)
 * 'order' => 'DESC' (the order direction)
 * 'id' => 0 (display a specific item)
@@ -94,7 +95,10 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 1. The testimonials management screen within the WordPress admin.
 
-== Upgrade Notice ==
+== Upgrade Notice =
+
+= 1.4.0 =
+* Adds "per_row" functionality, a "columns-X" CSS class on the wrapper, support for multiple comma-separated ID values in the "id" argument and a "no-image" CSS class if no image is available for the item.
 
 = 1.3.2 =
 * Adds filters for the single testimonials and testimonial archives URL slugs
@@ -123,8 +127,12 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Changelog ==
 
-= 1.3.2 =
-* 2013-08-01.
+= 1.4.0 =
+* 2013-08-20.
+* Adds "per_row" functionality and a "columns-X" CSS class on the wrapper.
+* Adds support for multiple comma-separated ID values in the "id" argument.
+* Adds a "no-image" CSS class if no image is available for the item.
+* Renames the effect CSS class to include "effect-" as a prefix (for example, "effect-fade").
 * Adds "woothemes_testimonials_single_slug" as a filter for the single testimonials URL slug
 * Adds "woothemes_testimonials_archive_slug" as a filter for the testimonials archive URL slug
 * Adds a flush_rewrite_rules() call on plugin activation

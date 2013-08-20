@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
  * All functionality pertaining to the Testimonials feature.
  *
  * @package WordPress
- * @subpackage WooThemes_Testimonials
+ * @subpackage Woothemes_Testimonials
  * @category Plugin
  * @author Matty
  * @since 1.0.0
@@ -547,7 +547,7 @@ class Woothemes_Testimonials {
 	/**
 	 * Flush the rewrite rules
 	 * @access public
-	 * @since 1.3.2
+	 * @since 1.4.0
 	 * @return void
 	 */
 	private function flush_rewrite_rules () {
