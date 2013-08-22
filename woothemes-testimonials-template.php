@@ -33,6 +33,7 @@ function woothemes_testimonials ( $args = '' ) {
 
 	$defaults = array(
 		'limit' => 5,
+		'per_row' => null,
 		'orderby' => 'menu_order',
 		'order' => 'DESC',
 		'id' => 0,
@@ -65,15 +66,21 @@ function woothemes_testimonials ( $args = '' ) {
 		// The Display.
 		if ( ! is_wp_error( $query ) && is_array( $query ) && count( $query ) > 0 ) {
 
-			if ( $args['effect'] != 'none' ) {
-				$effect = ' ' . $args['effect'];
+			$class = '';
+
+			if ( is_numeric( $args['per_row'] ) ) {
+				$class .= ' columns-' . intval( $args['per_row'] );
+			}
+
+			if ( 'none' != $args['effect'] ) {
+				$class .= ' effect-' . $args['effect'];
 			}
 
 			$html .= $args['before'] . "\n";
 			if ( '' != $args['title'] ) {
 				$html .= $args['before_title'] . esc_html( $args['title'] ) . $args['after_title'] . "\n";
 			}
-			$html .= '<div class="testimonials component' . esc_attr( $effect ) . '">' . "\n";
+			$html .= '<div class="testimonials component' . esc_attr( $class ) . '">' . "\n";
 
 			$html .= '<div class="testimonials-list">' . "\n";
 
@@ -87,7 +94,12 @@ function woothemes_testimonials ( $args = '' ) {
 
 				$css_class = 'quote';
 				if ( 1 == $count ) { $css_class .= ' first'; }
-				if ( count( $query ) == $count ) { $css_class .= ' last'; }
+				if ( $per_row == $count || count( $query ) == $count ) { $css_class .= ' last'; }
+
+				// Add a CSS class if no image is available.
+				if ( isset( $post->image ) && ( '' == $post->image ) ) {
+					$css_class .= ' no-image';
+				}
 
 				setup_postdata( $post );
 
@@ -135,6 +147,10 @@ function woothemes_testimonials ( $args = '' ) {
 
 				// Assign for output.
 				$html .= $template;
+
+				if( ( 0 == $count % $args['per_row'] ) ) {
+					$html .= '<div class="fix"></div>' . "\n";
+				}
 			}
 
 			wp_reset_postdata();
@@ -177,6 +193,7 @@ function woothemes_testimonials_shortcode ( $atts, $content = null ) {
 
 	$defaults = array(
 		'limit' => 5,
+		'per_row' => null,
 		'orderby' => 'menu_order',
 		'order' => 'DESC',
 		'id' => 0,
@@ -197,7 +214,6 @@ function woothemes_testimonials_shortcode ( $atts, $content = null ) {
 
 	// Fix integers.
 	if ( isset( $args['limit'] ) ) $args['limit'] = intval( $args['limit'] );
-	if ( isset( $args['id'] ) ) $args['id'] = intval( $args['id'] );
 	if ( isset( $args['size'] ) &&  ( 0 < intval( $args['size'] ) ) ) $args['size'] = intval( $args['size'] );
 	if ( isset( $args['category'] ) && is_numeric( $args['category'] ) ) $args['category'] = intval( $args['category'] );
 

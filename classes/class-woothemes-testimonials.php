@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
  * All functionality pertaining to the Testimonials feature.
  *
  * @package WordPress
- * @subpackage WooThemes_Testimonials
+ * @subpackage Woothemes_Testimonials
  * @category Plugin
  * @author Matty
  * @since 1.0.0
@@ -35,30 +35,30 @@ class Woothemes_Testimonials {
 		$this->token = 'testimonial';
 
 		$this->load_plugin_textdomain();
-		add_action( 'init', array( &$this, 'load_localisation' ), 0 );
+		add_action( 'init', array( $this, 'load_localisation' ), 0 );
 
 		// Run this on activation.
-		register_activation_hook( $this->file, array( &$this, 'activation' ) );
+		register_activation_hook( $this->file, array( $this, 'activation' ) );
 
-		add_action( 'init', array( &$this, 'register_post_type' ) );
+		add_action( 'init', array( $this, 'register_post_type' ) );
 		add_action( 'init', array( $this, 'register_taxonomy' ) );
 
 		if ( is_admin() ) {
 			global $pagenow;
 
-			add_action( 'admin_menu', array( &$this, 'meta_box_setup' ), 20 );
-			add_action( 'save_post', array( &$this, 'meta_box_save' ) );
-			add_filter( 'enter_title_here', array( &$this, 'enter_title_here' ) );
-			add_action( 'admin_print_styles', array( &$this, 'enqueue_admin_styles' ), 10 );
-			add_filter( 'post_updated_messages', array( &$this, 'updated_messages' ) );
+			add_action( 'admin_menu', array( $this, 'meta_box_setup' ), 20 );
+			add_action( 'save_post', array( $this, 'meta_box_save' ) );
+			add_filter( 'enter_title_here', array( $this, 'enter_title_here' ) );
+			add_action( 'admin_print_styles', array( $this, 'enqueue_admin_styles' ), 10 );
+			add_filter( 'post_updated_messages', array( $this, 'updated_messages' ) );
 
 			if ( $pagenow == 'edit.php' && isset( $_GET['post_type'] ) && esc_attr( $_GET['post_type'] ) == $this->token ) {
-				add_filter( 'manage_edit-' . $this->token . '_columns', array( &$this, 'register_custom_column_headings' ), 10, 1 );
-				add_action( 'manage_posts_custom_column', array( &$this, 'register_custom_columns' ), 10, 2 );
+				add_filter( 'manage_edit-' . $this->token . '_columns', array( $this, 'register_custom_column_headings' ), 10, 1 );
+				add_action( 'manage_posts_custom_column', array( $this, 'register_custom_columns' ), 10, 2 );
 			}
 		}
 
-		add_action( 'after_setup_theme', array( &$this, 'ensure_post_thumbnails_support' ) );
+		add_action( 'after_setup_theme', array( $this, 'ensure_post_thumbnails_support' ) );
 	} // End __construct()
 
 	/**
@@ -88,6 +88,10 @@ class Woothemes_Testimonials {
 			'menu_name' => __( 'Testimonials', 'woothemes-testimonials' )
 
 		);
+
+		$single_slug = apply_filters( 'woothemes_testimonials_single_slug', _x( 'testimonial', 'single post url slug', 'woothemes-testimonials' ) );
+		$archive_slug = apply_filters( 'woothemes_testimonials_archive_slug', _x( 'testimonials', 'post archive url slug', 'woothemes-testimonials' ) );
+
 		$args = array(
 			'labels' => $labels,
 			'public' => true,
@@ -95,11 +99,11 @@ class Woothemes_Testimonials {
 			'show_ui' => true,
 			'show_in_menu' => true,
 			'query_var' => true,
-			'rewrite' => array( 'slug' => 'testimonial' ),
+			'rewrite' => array( 'slug' => $single_slug, 'with_front' => false ),
 			'capability_type' => 'post',
-			'has_archive' => 'testimonials',
+			'has_archive' => $archive_slug,
 			'hierarchical' => false,
-			'supports' => array( 'title', 'editor', 'thumbnail', 'page-attributes' ),
+			'supports' => array( 'title', 'author' ,'editor', 'thumbnail', 'page-attributes' ),
 			'menu_position' => 5,
 			'menu_icon' => ''
 		);
@@ -216,7 +220,7 @@ class Woothemes_Testimonials {
 	 * @return void
 	 */
 	public function meta_box_setup () {
-		add_meta_box( 'testimonial-data', __( 'Testimonial Details', 'woothemes-testimonials' ), array( &$this, 'meta_box_content' ), $this->token, 'normal', 'high' );
+		add_meta_box( 'testimonial-data', __( 'Testimonial Details', 'woothemes-testimonials' ), array( $this, 'meta_box_content' ), $this->token, 'normal', 'high' );
 	} // End meta_box_setup()
 
 	/**
@@ -423,8 +427,16 @@ class Woothemes_Testimonials {
 		$query_args['order'] = $args['order'];
 		$query_args['suppress_filters'] = false;
 
-		if ( is_numeric( $args['id'] ) && ( intval( $args['id'] ) > 0 ) ) {
-			$query_args['p'] = intval( $args['id'] );
+		$ids = explode( ',', $args['id'] );
+		$ids = array_map( 'intval', $ids );
+
+		if ( 0 < count( $ids ) ) {
+			if ( 1 == count( $ids ) && is_numeric( $ids[0] ) && ( 0 < intval( $ids[0] ) ) ) {
+				$query_args['p'] = intval( $args['id'] );
+			} else {
+				$query_args['ignore_sticky_posts'] = 1;
+				$query_args['post__in'] = $ids;
+			}
 		}
 
 		// Whitelist checks.
@@ -517,6 +529,7 @@ class Woothemes_Testimonials {
 	 */
 	public function activation () {
 		$this->register_plugin_version();
+		$this->flush_rewrite_rules();
 	} // End activation()
 
 	/**
@@ -530,6 +543,17 @@ class Woothemes_Testimonials {
 			update_option( 'woothemes-testimonials' . '-version', $this->version );
 		}
 	} // End register_plugin_version()
+
+	/**
+	 * Flush the rewrite rules
+	 * @access public
+	 * @since 1.4.0
+	 * @return void
+	 */
+	private function flush_rewrite_rules () {
+		$this->register_post_type();
+		flush_rewrite_rules();
+	} // End flush_rewrite_rules()
 
 	/**
 	 * Ensure that "post-thumbnails" support is available for those themes that don't register it.
