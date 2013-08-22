@@ -428,9 +428,9 @@ class Woothemes_Testimonials {
 		$query_args['suppress_filters'] = false;
 
 		$ids = explode( ',', $args['id'] );
-		$ids = array_map( 'intval', $ids );
 
-		if ( 0 < count( $ids ) ) {
+		if ( 0 < intval( $args['id'] ) && 0 < count( $ids ) ) {
+			$ids = array_map( 'intval', $ids );
 			if ( 1 == count( $ids ) && is_numeric( $ids[0] ) && ( 0 < intval( $ids[0] ) ) ) {
 				$query_args['p'] = intval( $args['id'] );
 			} else {
