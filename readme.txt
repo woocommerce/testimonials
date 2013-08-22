@@ -4,7 +4,7 @@ Donate link: http://woothemes.com/
 Tags: testimonials, widget, shortcode, template-tag, feedback, customers
 Requires at least: 3.4.2
 Tested up to: 3.6.0
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,9 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Upgrade Notice =
 
+= 1.4.1 =
+* Fixes display of testimonials when no "id" parameter is set.
+
 = 1.4.0 =
 * Adds "per_row" functionality, a "columns-X" CSS class on the wrapper, support for multiple comma-separated ID values in the "id" argument and a "no-image" CSS class if no image is available for the item.
 
@@ -126,6 +129,10 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * Initial release. Woo!
 
 == Changelog ==
+
+= 1.4.1 =
+* 2013-08-22.
+* Fixes display of testimonials when no "id" parameter is set.
 
 = 1.4.0 =
 * 2013-08-20.
