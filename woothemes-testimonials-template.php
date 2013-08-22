@@ -148,7 +148,7 @@ function woothemes_testimonials ( $args = '' ) {
 				// Assign for output.
 				$html .= $template;
 
-				if( ( 0 == $count % $args['per_row'] ) ) {
+				if( 0 < $count && ( 0 == $count % $args['per_row'] ) ) {
 					$html .= '<div class="fix"></div>' . "\n";
 				}
 			}
