@@ -135,6 +135,7 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * Default testimonial args now filterable.
 * Schema friendly markup.
 * 'Testimonials Per Row' option added to widget.
+* UI tweaks for wp 3.8.
 
 = 1.4.1 =
 * 2013-08-22.
