@@ -31,26 +31,26 @@ if ( ! function_exists( 'woothemes_testimonials' ) ) {
 function woothemes_testimonials ( $args = '' ) {
 	global $post;
 
-	$defaults = array(
-		'limit' => 5,
-		'per_row' => null,
-		'orderby' => 'menu_order',
-		'order' => 'DESC',
-		'id' => 0,
-		'display_author' => true,
-		'display_avatar' => true,
-		'display_url' => true,
-		'effect' => 'fade', // Options: 'fade', 'none'
-		'pagination' => false,
-		'echo' => true,
-		'size' => 50,
-		'title' => '',
-		'before' => '<div class="widget widget_woothemes_testimonials">',
-		'after' => '</div>',
-		'before_title' => '<h2>',
-		'after_title' => '</h2>',
-		'category' => 0
-	);
+	$defaults = apply_filters( 'woothemes_testimonials_default_args', array(
+		'limit' 			=> 5,
+		'per_row' 			=> null,
+		'orderby' 			=> 'menu_order',
+		'order' 			=> 'DESC',
+		'id' 				=> 0,
+		'display_author' 	=> true,
+		'display_avatar' 	=> true,
+		'display_url' 		=> true,
+		'effect' 			=> 'fade', // Options: 'fade', 'none'
+		'pagination' 		=> false,
+		'echo' 				=> true,
+		'size' 				=> 50,
+		'title' 			=> '',
+		'before' 			=> '<div class="widget widget_woothemes_testimonials">',
+		'after' 			=> '</div>',
+		'before_title' 		=> '<h2>',
+		'after_title' 		=> '</h2>',
+		'category' 			=> 0,
+	) );
 
 	$args = wp_parse_args( $args, $defaults );
 
@@ -244,4 +244,3 @@ function woothemes_testimonials_content_default_filters () {
 
 add_action( 'woothemes_testimonials_before', 'woothemes_testimonials_content_default_filters' );
 }
-?>

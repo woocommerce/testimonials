@@ -4,7 +4,7 @@
  * Plugin URI: http://woothemes.com/
  * Description: Hi, I'm your testimonials management plugin for WordPress. Show off what your customers or website users are saying about your business and how great they say you are, using our shortcode, widget or template tag.
  * Author: WooThemes
- * Version: 1.4.1
+ * Version: 1.5.0
  * Author URI: http://woothemes.com/
  *
  * @package WordPress
@@ -19,5 +19,5 @@ require_once( 'woothemes-testimonials-template.php' );
 require_once( 'classes/class-woothemes-widget-testimonials.php' );
 global $woothemes_testimonials;
 $woothemes_testimonials = new Woothemes_Testimonials( __FILE__ );
-$woothemes_testimonials->version = '1.4.1';
+$woothemes_testimonials->version = '1.5.0';
 ?>
