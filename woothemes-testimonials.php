@@ -20,4 +20,3 @@ require_once( 'classes/class-woothemes-widget-testimonials.php' );
 global $woothemes_testimonials;
 $woothemes_testimonials = new Woothemes_Testimonials( __FILE__ );
 $woothemes_testimonials->version = '1.5.0';
-?>
