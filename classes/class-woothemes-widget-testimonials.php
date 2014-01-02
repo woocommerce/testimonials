@@ -38,10 +38,10 @@ class Woothemes_Widget_Testimonials extends WP_Widget {
 	 */
 	public function __construct() {
 		/* Widget variable settings. */
-		$this->woothemes_widget_cssclass = 'widget_woothemes_testimonials';
+		$this->woothemes_widget_cssclass 	= 'widget_woothemes_testimonials';
 		$this->woothemes_widget_description = __( 'Recent testimonials on your site.', 'woothemes-testimonials' );
-		$this->woothemes_widget_idbase = 'woothemes_testimonials';
-		$this->woothemes_widget_title = __( 'Testimonials', 'woothemes-testimonials' );
+		$this->woothemes_widget_idbase 		= 'woothemes_testimonials';
+		$this->woothemes_widget_title 		= __( 'Testimonials', 'woothemes-testimonials' );
 
 		/* Widget settings. */
 		$widget_ops = array( 'classname' => $this->woothemes_widget_cssclass, 'description' => $this->woothemes_widget_description );
@@ -85,6 +85,7 @@ class Woothemes_Widget_Testimonials extends WP_Widget {
 
 		// Integer values.
 		if ( isset( $instance['limit'] ) && ( 0 < count( $instance['limit'] ) ) ) { $args['limit'] = intval( $instance['limit'] ); }
+		if ( isset( $instance['per_row'] ) && ( 0 < count( $instance['per_row'] ) ) ) { $args['per_row'] = intval( $instance['per_row'] ); }
 		if ( isset( $instance['specific_id'] ) && ( 0 < count( $instance['specific_id'] ) ) ) { $args['id'] = intval( $instance['specific_id'] ); }
 		if ( isset( $instance['size'] ) && ( 0 < count( $instance['size'] ) ) ) { $args['size'] = intval( $instance['size'] ); }
 		if ( isset( $instance['category'] ) && is_numeric( $instance['category'] ) ) $args['category'] = intval( $instance['category'] );
@@ -116,22 +117,23 @@ class Woothemes_Widget_Testimonials extends WP_Widget {
 		$instance = $old_instance;
 
 		/* Strip tags for title and name to remove HTML (important for text inputs). */
-		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['title'] 			= strip_tags( $new_instance['title'] );
 
 		/* Make sure the integer values are definitely integers. */
-		$instance['limit'] = intval( $new_instance['limit'] );
-		$instance['specific_id'] = intval( $new_instance['specific_id'] );
-		$instance['size'] = intval( $new_instance['size'] );
-		$instance['category'] = intval( $new_instance['category'] );
+		$instance['limit'] 			= intval( $new_instance['limit'] );
+		$instance['per_row'] 		= intval( $new_instance['per_row'] );
+		$instance['specific_id'] 	= intval( $new_instance['specific_id'] );
+		$instance['size'] 			= intval( $new_instance['size'] );
+		$instance['category'] 		= intval( $new_instance['category'] );
 
 		/* The select box is returning a text value, so we escape it. */
-		$instance['orderby'] = esc_attr( $new_instance['orderby'] );
-		$instance['order'] = esc_attr( $new_instance['order'] );
+		$instance['orderby'] 		= esc_attr( $new_instance['orderby'] );
+		$instance['order'] 			= esc_attr( $new_instance['order'] );
 
 		/* The checkbox is returning a Boolean (true/false), so we check for that. */
 		$instance['display_author'] = (bool) esc_attr( $new_instance['display_author'] );
 		$instance['display_avatar'] = (bool) esc_attr( $new_instance['display_avatar'] );
-		$instance['display_url'] = (bool) esc_attr( $new_instance['display_url'] );
+		$instance['display_url'] 	= (bool) esc_attr( $new_instance['display_url'] );
 
 		return $instance;
 	} // End update()
@@ -148,18 +150,19 @@ class Woothemes_Widget_Testimonials extends WP_Widget {
 		/* Set up some default widget settings. */
 		/* Make sure all keys are added here, even with empty string values. */
 		$defaults = array(
-			'title' => '',
-			'limit' => 5,
-			'orderby' => 'menu_order',
-			'order' => 'DESC',
-			'specific_id' => '',
-			'display_author' => true,
-			'display_avatar' => true,
-			'display_url' => true,
-			'effect' => 'fade', // Options: 'fade', 'none'
-			'pagination' => false,
-			'size' => 50,
-			'category' => 0
+			'title' 			=> '',
+			'limit' 			=> 5,
+			'per_row'			=> null,
+			'orderby' 			=> 'menu_order',
+			'order' 			=> 'DESC',
+			'specific_id' 		=> '',
+			'display_author' 	=> true,
+			'display_avatar' 	=> true,
+			'display_url' 		=> true,
+			'effect' 			=> 'fade', // Options: 'fade', 'none'
+			'pagination' 		=> false,
+			'size' 				=> 50,
+			'category' 			=> 0,
 		);
 
 		$instance = wp_parse_args( (array) $instance, $defaults );
@@ -173,6 +176,11 @@ class Woothemes_Widget_Testimonials extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'limit' ); ?>"><?php _e( 'Limit:', 'woothemes-testimonials' ); ?></label>
 			<input type="text" name="<?php echo $this->get_field_name( 'limit' ); ?>"  value="<?php echo $instance['limit']; ?>" class="widefat" id="<?php echo $this->get_field_id( 'limit' ); ?>" />
+		</p>
+		<!-- Widget Per Row: Text Input -->
+		<p>
+			<label for="<?php echo $this->get_field_id( 'per_row' ); ?>"><?php _e( 'Testimonials Per Row:', 'woothemes-testimonials' ); ?></label>
+			<input type="text" name="<?php echo $this->get_field_name( 'per_row' ); ?>"  value="<?php echo $instance['per_row']; ?>" class="widefat" id="<?php echo $this->get_field_id( 'per_row' ); ?>" />
 		</p>
 		<!-- Widget Image Size: Text Input -->
 		<p>

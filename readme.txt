@@ -134,6 +134,7 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * 2014-01-02.
 * Default testimonial args now filterable.
 * Schema friendly markup.
+* 'Testimonials Per Row' option added to widget.
 
 = 1.4.1 =
 * 2013-08-22.
