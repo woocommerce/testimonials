@@ -103,7 +103,7 @@ class Woothemes_Testimonials {
 			'capability_type' => 'post',
 			'has_archive' => $archive_slug,
 			'hierarchical' => false,
-			'supports' => array( 'title', 'author' ,'editor', 'thumbnail', 'page-attributes' ),
+			'supports' => array( 'title', 'author' ,'editor', 'thumbnail', 'excerpt', 'page-attributes' ),
 			'menu_position' => 5,
 			'menu_icon' => ''
 		);
