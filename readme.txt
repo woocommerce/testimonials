@@ -136,6 +136,7 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * Schema friendly markup.
 * 'Testimonials Per Row' option added to widget.
 * UI tweaks for wp 3.8.
+* Added woothemes_testimonials_author_link_text filter.
 
 = 1.4.1 =
 * 2013-08-22.

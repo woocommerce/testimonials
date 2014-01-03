@@ -119,7 +119,7 @@ function woothemes_testimonials ( $args = '' ) {
 					}
 
 					if ( true == $args['display_url'] && '' != $post->url ) {
-						$author .= ' <span class="url"><a href="' . esc_url( $post->url ) . '" itemprop="url">' . $post->url . '</a></span><!--/.excerpt-->' . "\n";
+						$author .= ' <span class="url"><a href="' . esc_url( $post->url ) . '" itemprop="url">' . apply_filters( 'woothemes_testimonials_author_link_text', $text = esc_url( $post->url ) ) . '</a></span><!--/.excerpt-->' . "\n";
 					}
 
 					$author .= '</cite><!--/.author-->' . "\n";
