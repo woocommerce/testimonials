@@ -3,8 +3,8 @@ Contributors: woothemes, mattyza, jameskoster
 Donate link: http://woothemes.com/
 Tags: testimonials, widget, shortcode, template-tag, feedback, customers
 Requires at least: 3.4.2
-Tested up to: 3.6.0
-Stable tag: 1.4.1
+Tested up to: 3.8.0
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,14 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * Initial release. Woo!
 
 == Changelog ==
+
+= 1.5.0 =
+* 2014-01-02.
+* Default testimonial args now filterable.
+* Schema friendly markup.
+* 'Testimonials Per Row' option added to widget.
+* UI tweaks for wp 3.8.
+* Added woothemes_testimonials_author_link_text filter.
 
 = 1.4.1 =
 * 2013-08-22.

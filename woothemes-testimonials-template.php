@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! function_exists( 'woothemes_get_testimonials' ) ) {
 /**
- * Wrapper function to get the testimonials from the WooDojo_Testimonials class.
+ * Wrapper function to get the testimonials from the WooThemes_Testimonials class.
  * @param  string/array $args  Arguments.
  * @since  1.0.0
  * @return array/boolean       Array if true, boolean if false.
@@ -31,26 +31,26 @@ if ( ! function_exists( 'woothemes_testimonials' ) ) {
 function woothemes_testimonials ( $args = '' ) {
 	global $post;
 
-	$defaults = array(
-		'limit' => 5,
-		'per_row' => null,
-		'orderby' => 'menu_order',
-		'order' => 'DESC',
-		'id' => 0,
-		'display_author' => true,
-		'display_avatar' => true,
-		'display_url' => true,
-		'effect' => 'fade', // Options: 'fade', 'none'
-		'pagination' => false,
-		'echo' => true,
-		'size' => 50,
-		'title' => '',
-		'before' => '<div class="widget widget_woothemes_testimonials">',
-		'after' => '</div>',
-		'before_title' => '<h2>',
-		'after_title' => '</h2>',
-		'category' => 0
-	);
+	$defaults = apply_filters( 'woothemes_testimonials_default_args', array(
+		'limit' 			=> 5,
+		'per_row' 			=> null,
+		'orderby' 			=> 'menu_order',
+		'order' 			=> 'DESC',
+		'id' 				=> 0,
+		'display_author' 	=> true,
+		'display_avatar' 	=> true,
+		'display_url' 		=> true,
+		'effect' 			=> 'fade', // Options: 'fade', 'none'
+		'pagination' 		=> false,
+		'echo' 				=> true,
+		'size' 				=> 50,
+		'title' 			=> '',
+		'before' 			=> '<div class="widget widget_woothemes_testimonials">',
+		'after' 			=> '</div>',
+		'before_title' 		=> '<h2>',
+		'after_title' 		=> '</h2>',
+		'category' 			=> 0,
+	) );
 
 	$args = wp_parse_args( $args, $defaults );
 
@@ -85,7 +85,7 @@ function woothemes_testimonials ( $args = '' ) {
 			$html .= '<div class="testimonials-list">' . "\n";
 
 			// Begin templating logic.
-			$tpl = '<div id="quote-%%ID%%" class="%%CLASS%%"><blockquote class="testimonials-text">%%TEXT%%</blockquote>%%AVATAR%% %%AUTHOR%%<div class="fix"></div></div>';
+			$tpl = '<div id="quote-%%ID%%" class="%%CLASS%%" itemprop="review" itemscope itemtype="http://schema.org/Review"><blockquote class="testimonials-text" itemprop="reviewBody">%%TEXT%%</blockquote>%%AVATAR%% %%AUTHOR%%</div>';
 			$tpl = apply_filters( 'woothemes_testimonials_item_template', $tpl, $args );
 
 			$count = 0;
@@ -108,18 +108,18 @@ function woothemes_testimonials ( $args = '' ) {
 
 				// If we need to display the author, get the data.
 				if ( ( get_the_title( $post ) != '' ) && true == $args['display_author'] ) {
-					$author .= '<cite class="author">';
+					$author .= '<cite class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">';
 
-					$author_name = get_the_title( $post );
+					$author_name = '<span itemprop="name">' . get_the_title( $post ) . '</span>';
 
 					$author .= $author_name;
 
 					if ( isset( $post->byline ) && '' != $post->byline ) {
-						$author .= ' <span class="excerpt">' . $post->byline . '</span><!--/.excerpt-->' . "\n";
+						$author .= ' <span class="title" itemprop="jobTitle">' . $post->byline . '</span><!--/.title-->' . "\n";
 					}
 
 					if ( true == $args['display_url'] && '' != $post->url ) {
-						$author .= ' <span class="url"><a href="' . esc_url( $post->url ) . '">' . $post->url . '</a></span><!--/.excerpt-->' . "\n";
+						$author .= ' <span class="url"><a href="' . esc_url( $post->url ) . '" itemprop="url">' . apply_filters( 'woothemes_testimonials_author_link_text', $text = esc_url( $post->url ) ) . '</a></span><!--/.excerpt-->' . "\n";
 					}
 
 					$author .= '</cite><!--/.author-->' . "\n";
@@ -192,19 +192,19 @@ function woothemes_testimonials_shortcode ( $atts, $content = null ) {
 	$args = (array)$atts;
 
 	$defaults = array(
-		'limit' => 5,
-		'per_row' => null,
-		'orderby' => 'menu_order',
-		'order' => 'DESC',
-		'id' => 0,
-		'display_author' => true,
-		'display_avatar' => true,
-		'display_url' => true,
-		'effect' => 'fade', // Options: 'fade', 'none'
-		'pagination' => false,
-		'echo' => true,
-		'size' => 50,
-		'category' => 0
+		'limit' 			=> 5,
+		'per_row' 			=> null,
+		'orderby' 			=> 'menu_order',
+		'order' 			=> 'DESC',
+		'id' 				=> 0,
+		'display_author' 	=> true,
+		'display_avatar' 	=> true,
+		'display_url' 		=> true,
+		'effect' 			=> 'fade', // Options: 'fade', 'none'
+		'pagination' 		=> false,
+		'echo' 				=> true,
+		'size' 				=> 50,
+		'category' 			=> 0,
 	);
 
 	$args = shortcode_atts( $defaults, $atts );
@@ -244,4 +244,3 @@ function woothemes_testimonials_content_default_filters () {
 
 add_action( 'woothemes_testimonials_before', 'woothemes_testimonials_content_default_filters' );
 }
-?>

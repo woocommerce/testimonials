@@ -81,7 +81,17 @@ class Woothemes_Testimonials_Taxonomy {
 	 * @return  array Default arguments.
 	 */
 	private function _get_default_args () {
-		return array( 'labels' => $this->_get_default_labels(), 'public' => true, 'hierarchical' => true, 'show_ui' => true, 'show_admin_column' => true, 'query_var' => true, 'show_in_nav_menus' => false, 'show_tagcloud' => false );
+		return array(
+			'labels'            => $this->_get_default_labels(),
+			'public'            => true,
+			'hierarchical'      => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'query_var'         => true,
+			'show_in_nav_menus' => false,
+			'show_tagcloud'     => false,
+			'rewrite' => array( 'slug' => 'testimonials', 'with_front' => false ) );
+		);
 	} // End _get_default_args()
 
 	/**
