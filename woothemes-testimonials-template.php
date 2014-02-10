@@ -93,8 +93,8 @@ function woothemes_testimonials ( $args = '' ) {
 				$template = $tpl;
 
 				$css_class = 'quote';
-				if ( ( is_numeric( $args['per_row'] ) && ( 0 == ( $count - 1 ) % $args['per_row'] ) ) || 1 == $count ) { $css_class .= ' first'; }
-				if ( ( is_numeric( $args['per_row'] ) && ( 0 == $count % $args['per_row'] ) ) || count( $query ) == $count ) { $css_class .= ' last'; }
+				if ( ( is_numeric( $args['per_row'] ) && ( $args['per_row'] > 0 ) && ( 0 == ( $count - 1 ) % $args['per_row'] ) ) || 1 == $count ) { $css_class .= ' first'; }
+				if ( ( is_numeric( $args['per_row'] ) && ( $args['per_row'] > 0 ) && ( 0 == $count % $args['per_row'] ) ) || count( $query ) == $count ) { $css_class .= ' last'; }
 
 				// Add a CSS class if no image is available.
 				if ( isset( $post->image ) && ( '' == $post->image ) ) {
@@ -148,7 +148,7 @@ function woothemes_testimonials ( $args = '' ) {
 				// Assign for output.
 				$html .= $template;
 
-				if( is_numeric( $args['per_row'] ) && ( 0 == $count % $args['per_row'] ) ) {
+				if( is_numeric( $args['per_row'] ) && ( $args['per_row'] > 0 ) && ( 0 == $count % $args['per_row'] ) ) {
 					$html .= '<div class="fix"></div>' . "\n";
 				}
 			}
