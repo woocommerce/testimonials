@@ -107,7 +107,7 @@ class Woothemes_Testimonials {
 			'menu_position' => 5,
 			'menu_icon' => ''
 		);
-		register_post_type( $this->token, $args );
+		register_post_type( $this->token, apply_filters( 'woothemes_testimonials_post_type_args', $args ) );
 	} // End register_post_type()
 
 	/**
