@@ -142,7 +142,7 @@ function woothemes_testimonials ( $args = '' ) {
 
 				// Remove any remaining %%AVATAR%% template tags.
 				$template = str_replace( '%%AVATAR%%', '', $template );
-				$content = apply_filters( 'woothemes_testimonials_content', get_the_content(), $post );
+				$content = apply_filters( 'woothemes_testimonials_content', apply_filters( 'the_content', get_the_content() ), $post );
 				$template = str_replace( '%%TEXT%%', $content, $template );
 
 				// Assign for output.
