@@ -134,6 +134,8 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * 2014-02-20.
 Fix - Potential division by zero notice.
 Tweak - Default post type args are now filterable: `woothemes_testimonials_post_type_args` (props lkraav).
+Tweak - Remove unused assets.
+Tweak - Avatar no longer links to testimonial url.
 
 = 1.5.0 =
 * 2014-01-02.
