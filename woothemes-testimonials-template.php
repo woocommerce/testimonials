@@ -93,8 +93,8 @@ function woothemes_testimonials ( $args = '' ) {
 				$template = $tpl;
 
 				$css_class = 'quote';
-				if ( ( is_numeric( $args['per_row'] ) && ( 0 == ( $count - 1 ) % $args['per_row'] ) ) || 1 == $count ) { $css_class .= ' first'; }
-				if ( ( is_numeric( $args['per_row'] ) && ( 0 == $count % $args['per_row'] ) ) || count( $query ) == $count ) { $css_class .= ' last'; }
+				if ( ( is_numeric( $args['per_row'] ) && ( $args['per_row'] > 0 ) && ( 0 == ( $count - 1 ) % $args['per_row'] ) ) || 1 == $count ) { $css_class .= ' first'; }
+				if ( ( is_numeric( $args['per_row'] ) && ( $args['per_row'] > 0 ) && ( 0 == $count % $args['per_row'] ) ) || count( $query ) == $count ) { $css_class .= ' last'; }
 
 				// Add a CSS class if no image is available.
 				if ( isset( $post->image ) && ( '' == $post->image ) ) {
@@ -135,20 +135,20 @@ function woothemes_testimonials ( $args = '' ) {
 				$template = str_replace( '%%CLASS%%', esc_attr( $css_class ), $template );
 
 				if ( isset( $post->image ) && ( '' != $post->image ) && true == $args['display_avatar'] ) {
-					$template = str_replace( '%%AVATAR%%', '<a href="' . esc_url( $post->url ) . '" class="avatar-link">' . $post->image . '</a>', $template );
+					$template = str_replace( '%%AVATAR%%', $post->image, $template );
 				} else {
 					$template = str_replace( '%%AVATAR%%', '', $template );
 				}
 
 				// Remove any remaining %%AVATAR%% template tags.
 				$template = str_replace( '%%AVATAR%%', '', $template );
-				$content = apply_filters( 'woothemes_testimonials_content', get_the_content(), $post );
+				$content = apply_filters( 'woothemes_testimonials_content', apply_filters( 'the_content', get_the_content() ), $post );
 				$template = str_replace( '%%TEXT%%', $content, $template );
 
 				// Assign for output.
 				$html .= $template;
 
-				if( is_numeric( $args['per_row'] ) && ( 0 == $count % $args['per_row'] ) ) {
+				if( is_numeric( $args['per_row'] ) && ( $args['per_row'] > 0 ) && ( 0 == $count % $args['per_row'] ) ) {
 					$html .= '<div class="fix"></div>' . "\n";
 				}
 			}
