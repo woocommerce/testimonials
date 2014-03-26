@@ -135,7 +135,7 @@ function woothemes_testimonials ( $args = '' ) {
 				$template = str_replace( '%%CLASS%%', esc_attr( $css_class ), $template );
 
 				if ( isset( $post->image ) && ( '' != $post->image ) && true == $args['display_avatar'] ) {
-					$template = str_replace( '%%AVATAR%%', '<a href="' . esc_url( $post->url ) . '" class="avatar-link">' . $post->image . '</a>', $template );
+					$template = str_replace( '%%AVATAR%%', $post->image, $template );
 				} else {
 					$template = str_replace( '%%AVATAR%%', '', $template );
 				}
