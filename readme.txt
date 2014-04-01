@@ -4,7 +4,7 @@ Donate link: http://woothemes.com/
 Tags: testimonials, widget, shortcode, template-tag, feedback, customers
 Requires at least: 3.4.2
 Tested up to: 3.8.1
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,10 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * Initial release. Woo!
 
 == Changelog ==
+
+= 1.5.2 =
+* 2014-04-01.
+* Tweak - If a URL is set the avatar will link to it.
 
 = 1.5.1 =
 * 2014-03-26.
