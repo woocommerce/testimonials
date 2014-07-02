@@ -29,7 +29,7 @@ if ( ! function_exists( 'woothemes_testimonials' ) ) {
  * @return string
  */
 function woothemes_testimonials ( $args = '' ) {
-	global $post;
+	global $more;
 
 	$defaults = apply_filters( 'woothemes_testimonials_default_args', array(
 		'limit' 			=> 5,
@@ -134,16 +134,21 @@ function woothemes_testimonials ( $args = '' ) {
 				$template = str_replace( '%%ID%%', get_the_ID(), $template );
 				$template = str_replace( '%%CLASS%%', esc_attr( $css_class ), $template );
 
-				if ( isset( $post->image ) && ( '' != $post->image ) && true == $args['display_avatar'] ) {
+				if ( isset( $post->image ) && ( '' != $post->image ) && true == $args['display_avatar'] && ( '' != $post->url ) ) {
+					$template = str_replace( '%%AVATAR%%', '<a href="' . esc_url( $post->url ) . '" class="avatar-link">' . $post->image . '</a>', $template );
+				} elseif ( isset( $post->image ) && ( '' != $post->image ) && true == $args['display_avatar'] ) {
 					$template = str_replace( '%%AVATAR%%', $post->image, $template );
 				} else {
 					$template = str_replace( '%%AVATAR%%', '', $template );
 				}
 
 				// Remove any remaining %%AVATAR%% template tags.
-				$template = str_replace( '%%AVATAR%%', '', $template );
-				$content = apply_filters( 'woothemes_testimonials_content', apply_filters( 'the_content', get_the_content() ), $post );
-				$template = str_replace( '%%TEXT%%', $content, $template );
+				$template 	= str_replace( '%%AVATAR%%', '', $template );
+				$real_more 	= $more;
+			    $more      	= 0;
+				$content 	= apply_filters( 'woothemes_testimonials_content', apply_filters( 'the_content', get_the_content( __( 'Read full testimonial...', 'our-team-by-woothemes' ) ) ), $post );
+				$more      	= $real_more;
+				$template 	= str_replace( '%%TEXT%%', $content, $template );
 
 				// Assign for output.
 				$html .= $template;

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  \n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/testimonials-by-woothemes\n"
-"POT-Creation-Date: 2014-03-26 16:03:57+00:00\n"
+"POT-Creation-Date: 2014-07-02 12:07:09+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -302,10 +302,14 @@ msgstr ""
 msgid "Descending"
 msgstr ""
 
-#: woothemes-testimonials-template.php:162
+#: woothemes-testimonials-template.php:149
+msgid "Read full testimonial..."
+msgstr ""
+
+#: woothemes-testimonials-template.php:167
 msgid "Previous"
 msgstr ""
 
-#: woothemes-testimonials-template.php:163
+#: woothemes-testimonials-template.php:168
 msgid "Next"
 msgstr ""
