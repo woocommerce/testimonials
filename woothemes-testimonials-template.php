@@ -29,7 +29,6 @@ if ( ! function_exists( 'woothemes_testimonials' ) ) {
  * @return string
  */
 function woothemes_testimonials ( $args = '' ) {
-	global $post;
 
 	$defaults = apply_filters( 'woothemes_testimonials_default_args', array(
 		'limit' 			=> 5,
