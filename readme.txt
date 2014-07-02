@@ -131,10 +131,9 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 == Changelog ==
 
 = 1.5.2 =
-* 2014-07-02.
+* 2014-04-14.
 * Tweak - If a URL is set the avatar will link to it.
 * Tweak - More tag works as expected.
-* Fix - Dont override global $post variable.
 
 = 1.5.1 =
 * 2014-03-26.
