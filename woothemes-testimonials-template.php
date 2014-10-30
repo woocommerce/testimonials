@@ -249,3 +249,105 @@ function woothemes_testimonials_content_default_filters () {
 
 add_action( 'woothemes_testimonials_before', 'woothemes_testimonials_content_default_filters' );
 }
+
+
+if ( ! function_exists( 'woothemes_testimonials_submission_form_html' ) ) {
+/**
+ * Adds a testimonials submission form html
+ *
+ * @since 1.6.0
+ * @return void
+ */
+function woothemes_testimonials_submission_form_html () {
+	
+	$html = '';
+	
+	ob_start();
+	do_action( 'woothemes_testimonials_before_submission_form' );
+    $html .= ob_get_contents();
+    ob_end_clean();
+
+	$html .= '<div class="col2-set" id="testimonials_submission_form">';
+	$html .= '<div class="col-1">';		
+	$html .= '<h2>' . __( 'Add a testimonial', 'woothemes-testimonials' ) . '</h2>';
+	$html .= '<form method="post" class="testimonials_submission_form">';
+	
+	ob_start();
+	do_action( 'woothemes_testimonials_submission_form_start' );
+    $html .= ob_get_contents();
+    ob_end_clean();
+	
+	ob_start();
+	do_action( 'woothemes_testimonials_submission_form' );
+    $html .= ob_get_contents();
+    ob_end_clean();
+          	
+	$html .= '<p class="form-row">';
+	$html .= wp_nonce_field( 'woothemes_testimonials_submission' );
+	$html .= '<input type="submit" class="button" name="submit" value="' . __( 'Submit for review', 'woothemes-testimonials' ) . '" />';
+	$html .= '</p>';
+	
+	// Honeypot
+	$honeypot = '';
+	if( isset( $_POST['checking'] ) ) {
+		$honeypot = esc_attr( $_POST['checking'] );
+	};
+	
+	$html .= '<label for="checking" class="screenReader">' . __( 'If you want to submit this form, do not enter anything in this field', 'woothemes-testimonials' ) . '</label><input type="text" name="checking" id="checking" class="screenReader" value="' . $honeypot . '" />';
+	
+	ob_start();
+	do_action( 'woothemes_testimonials_submission_form_end' );
+    $html .= ob_get_contents();
+    ob_end_clean();
+	
+	$html .= '</form>';
+	$html .= '</div>';
+	$html .= '</div>';
+	
+	ob_start();
+	do_action( 'woothemes_testimonials_after_submission_form' );
+    $html .= ob_get_contents();
+    ob_end_clean();
+
+    return $html;
+    
+} // End woothemes_testimonials_submission_form_html()
+
+}
+
+add_shortcode( 'woothemes_testimonials_form', 'woothemes_testimonials_submission_form_html' );
+
+
+if ( ! function_exists( 'woothemes_testimonials_prepare_submission_form' ) ) {
+
+function woothemes_testimonials_prepare_submission_form () {
+	
+	$html = '';
+	$html .= '<p class="form-row form-row-wide">';
+	$html .= '<label for="name">' . __( 'Name', 'woothemes-testimonials' ) . '<span class="required">*</span></label>';		
+	$html .= '<input type="text" class="input-text" name="name" id="name" />';
+	$html .= '</p>';
+	$html .= '<p class="form-row form-row-wide">';
+	$html .= '<label for="testimonial-content">' . __( 'Testimonial Content', 'woocommerce' ) . '<span class="required">*</span></label>';
+	$html .= '<textarea placeholder="Your Message" class="input-text" name="testimonial-content" rows="10" cols="40" id="testimonial-content"></textarea>';
+	$html .= '</p>';
+	$html .= '<p class="form-row form-row-wide">';
+	$html .= '<label for="gravatar-email">' . __( 'Gravatar E-mail Address', 'woothemes-testimonials' ) . '</label>';		
+	$html .= '<input type="text" class="input-text" name="gravatar-email" id="gravatar-email" />';
+	$html .= '</p>';
+	$html .= '<p class="form-row form-row-wide">';
+	$html .= '<label for="byline">' . __( 'Byline', 'woothemes-testimonials' ) . '</label>';		
+	$html .= '<input type="text" class="input-text" name="byline" id="byline" />';
+	$html .= '</p>';
+	$html .= '<p class="form-row form-row-wide">';
+	$html .= '<label for="url">' . __( 'URL', 'woothemes-testimonials' ) . '</label>';		
+	$html .= '<input type="text" class="input-text" name="url" id="url" />';
+	$html .= '</p>';
+	
+	echo $html;
+
+} // End woothemes_testimonials_prepare_submission_form()
+
+}
+
+add_action( 'woothemes_testimonials_submission_form', 'woothemes_testimonials_prepare_submission_form' );

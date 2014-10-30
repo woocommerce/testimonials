@@ -1,10 +1,10 @@
 === Testimonials by WooThemes ===
-Contributors: woothemes, mattyza, jameskoster
+Contributors: woothemes, mattyza, jameskoster, danieldudzic
 Donate link: http://woothemes.com/
 Tags: testimonials, widget, shortcode, template-tag, feedback, customers
 Requires at least: 3.4.2
 Tested up to: 3.9.1
-Stable tag: 1.5.3
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
