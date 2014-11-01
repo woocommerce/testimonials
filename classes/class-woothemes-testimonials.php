@@ -42,7 +42,7 @@ class Woothemes_Testimonials {
 
 		add_action( 'init', array( $this, 'register_post_type' ) );
 		add_action( 'init', array( $this, 'register_taxonomy' ) );
-
+		
 		if ( is_admin() ) {
 			global $pagenow;
 
@@ -59,6 +59,8 @@ class Woothemes_Testimonials {
 		}
 
 		add_action( 'after_setup_theme', array( $this, 'ensure_post_thumbnails_support' ) );
+		
+		$submission_form = new Woothemes_Testimonials_Submission( __FILE__ );
 	} // End __construct()
 
 	/**
