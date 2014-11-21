@@ -19,7 +19,6 @@ class Woothemes_Testimonials_Submission {
 	public $errors;
 	public $response;
 	public $response_items;
-	public $moderator_emails;
 	public $testimonial_id;
 
 	/**
@@ -70,7 +69,17 @@ class Woothemes_Testimonials_Submission {
 
 		// If the 'notify' parameter is passed, the moderator(s) will receive email notifications.
 		if( $atts['notify'] != '' ) {
-			$this->moderator_emails = explode( ',', $atts['notify'] );
+
+			$saved_emails = get_option( '_woothemes_testimonials_moderator_emails' );
+
+			// Save the email(s) as an option.
+			if( $saved_emails == '' ) {
+			    add_option( '_woothemes_testimonials_moderator_emails', $atts['notify'] );
+		    } elseif ( $saved_emails != $atts['notify'] ) {
+			    update_option( '_woothemes_testimonials_moderator_emails', $atts['notify'] );
+		    }
+		} else {
+			delete_option( '_woothemes_testimonials_moderator_emails' );
 		}
 
 		$html = '';
@@ -275,13 +284,13 @@ class Woothemes_Testimonials_Submission {
 
 					// If the submitted data will pass the validation, let's go and add the testimonial.
 					if ( $this->validate_testimonial_data( $testimonial_data, $testimonial_data_raw ) == true ) {
+
 						if ( $this->add_testimonial( $testimonial_data ) ) {
 							// Success
 							$this->generate_response( __( 'Your testimonial has been submitted and is now awaiting moderation.', 'woothemes-testimonials' ), 'success' );
-							if( $this->moderator_emails != '' ) {
-								// Send an email notification to the moderator(s).
-								$this->notify_moderators( $testimonial_data );
-							}
+
+							// Send an email notification to the moderator(s).
+							$this->notify_moderators( $testimonial_data );
 						} else {
 							// Failure
 							$this->generate_response( __( 'Your testimonial data seems to be correct, but something went wrong. Unfortunately your testimonial could not be submitted.', 'woothemes-testimonials' ), 'error' );
@@ -558,17 +567,21 @@ class Woothemes_Testimonials_Submission {
 		$author_byline = 	$testimonial_data['woothemes_testimonials_byline'];
 		$blogname = 		wp_specialchars_decode( get_option('blogname'), ENT_QUOTES );
 
-		$message  = __( 'A new testimonial is waiting for your approval.', 'woothemes-testimonials' ) . "\r\n";
-		$message .= sprintf( __( 'Author: %1$s <%2$s>', 'woothemes-testimonials' ), $author_name, $author_email ) . "\r\n";
-		$message .= sprintf( __( 'E-mail: %s', 'woothemes-testimonials' ), $author_email ) . "\r\n";
-		$message .= sprintf( __( 'URL: %s', 'woothemes-testimonials' ), $author_url ) . "\r\n";
-		$message .= __( 'Testimonial: ', 'woothemes-testimonials' ) . "\r\n" . $content . "\r\n\r\n";
+		$message  = '<h4>' . __( 'A new testimonial is waiting for your approval.', 'woothemes-testimonials' ) . '</h4><br />';
+		$message .= '<p>' . sprintf( __( '<h5>Author</h5> %1$s <%2$s>', 'woothemes-testimonials' ), $author_name, $author_email ) . '</p><br />';
+		$message .= '<p>' . sprintf( __( '<h5>E-mail</h5> %s', 'woothemes-testimonials' ), $author_email ) . '</p><br />';
+		$message .= '<p>' . sprintf( __( '<h5>URL</h5> %s', 'woothemes-testimonials' ), $author_url ) . '</p><br />';
+		$message .= '<p>' . __( '<h5>Testimonial</h5>', 'woothemes-testimonials' ) . '</p><p>' . $content . '</p><br />';
 
-		$message .= sprintf( __( 'Moderate it: %s', 'woothemes-testimonials' ),  admin_url( 'post.php?action=edit&post=' . $this->testimonial_id ) ) . "\r\n";
+		$message .= '<p>' . sprintf( __( '<h5>You can manage the submission here: %s</h5>', 'woothemes-testimonials' ),  admin_url( 'post.php?action=edit&post=' . $this->testimonial_id ) ) . '</p>';
 
-		$subject = sprintf( __( '[%1$s] Please moderate a new testimonial from "%2$s"', 'woothemes-testimonials' ), $blogname, $author_name );
+		$subject = sprintf( __( '[%1$s] Please moderate a new testimonial from "%2$s".', 'woothemes-testimonials' ), $blogname, $author_name );
 
-		$headers = 'Content-Type: text/html\r\n';
+		$headers = "From: " . strip_tags( get_option( 'admin_email' ) ) . "\r\n";
+		$headers .= "MIME-Version: 1.0\r\n";
+		$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+
+		$moderator_emails = explode( ',', get_option( '_woothemes_testimonials_moderator_emails' ) );
 
 		// Filter the testimonial notification email content.
 		$message = apply_filters( 'woothemes_testimonials_notification_content', $message );
@@ -579,7 +592,7 @@ class Woothemes_Testimonials_Submission {
 		// Filter the testimonial notification email headers.
 		$headers = apply_filters( 'woothemes_testimonials_notification_headers', $headers );
 
-		foreach ( $this->moderator_emails as $email ) {
+		foreach ( $moderator_emails as $email ) {
 			wp_mail( $email, wp_specialchars_decode( $subject ), $message, $headers );
 		}
 
