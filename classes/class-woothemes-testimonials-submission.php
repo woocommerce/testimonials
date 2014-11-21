@@ -19,6 +19,8 @@ class Woothemes_Testimonials_Submission {
 	public $errors;
 	public $response;
 	public $response_items;
+	public $moderator_emails;
+	public $testimonial_id;
 
 	/**
 	 * Constructor function.
@@ -64,7 +66,12 @@ class Woothemes_Testimonials_Submission {
 	 * @since 1.6.0
 	 * @return string submission form html
 	 */
-	public function submission_form () {
+	public function submission_form ( $atts ) {
+
+		// If the 'notify' parameter is passed, the moderator(s) will receive email notifications.
+		if( $atts['notify'] != '' ) {
+			$this->moderator_emails = explode( ',', $atts['notify'] );
+		}
 
 		$html = '';
 
@@ -123,6 +130,11 @@ class Woothemes_Testimonials_Submission {
 				    $html .= '<input type="text" class="input-checking" name="' . $field_name . '" id="' . $field_name . '" />';
 
 			    } elseif ( $field_params['type'] == 'submit' ) {
+
+					ob_start();
+					do_action( 'woothemes_testimonials_before_submit_field' );
+					$html .= ob_get_contents();
+					ob_end_clean();
 
 				    $html .= '<input type="submit" class="button" name="' . $field_name . '" id="' . $field_name . '" value="' . $field_params['label'] . '" />';
 
@@ -266,6 +278,10 @@ class Woothemes_Testimonials_Submission {
 						if ( $this->add_testimonial( $testimonial_data ) ) {
 							// Success
 							$this->generate_response( __( 'Your testimonial has been submitted and is now awaiting moderation.', 'woothemes-testimonials' ), 'success' );
+							if( $this->moderator_emails != '' ) {
+								// Send an email notification to the moderator(s).
+								$this->notify_moderators( $testimonial_data );
+							}
 						} else {
 							// Failure
 							$this->generate_response( __( 'Your testimonial data seems to be correct, but something went wrong. Unfortunately your testimonial could not be submitted.', 'woothemes-testimonials' ), 'error' );
@@ -278,7 +294,7 @@ class Woothemes_Testimonials_Submission {
 
 				} else {
 					// Someone is playing dirty.
-					$this->generate_response( __( 'Cheatin\' Uh?', 'woothemes-testimonials' ), 'error');
+					$this->generate_response( __( 'Cheatin&#8217; huh?', 'woothemes-testimonials' ), 'error');
 				}
 
 			}
@@ -515,6 +531,8 @@ class Woothemes_Testimonials_Submission {
 
 		$post_id = wp_insert_post( $testimonial_information );
 
+		$this->testimonial_id = $post_id;
+
 		update_post_meta( $post_id, '_gravatar_email', $testimonial_data['woothemes_testimonials_email'] );
 		update_post_meta( $post_id, '_byline', $testimonial_data['woothemes_testimonials_byline'] );
 		update_post_meta( $post_id, '_url', $testimonial_data['woothemes_testimonials_website_url'] );
@@ -522,5 +540,49 @@ class Woothemes_Testimonials_Submission {
 		return $post_id;
 
 	} // End add_testimonial()
+
+	/**
+	 * Send an email notification to the moderator(s).
+	 *
+	 * @param array $testimonial_data Sanitized $_POST testimonial data.
+	 * @access public
+	 * @since 1.6.0
+	 * @return void
+	 */
+	public function notify_moderators ( $testimonial_data ) {
+
+		$author_name =  	$testimonial_data['woothemes_testimonials_name'];
+		$content = 			$testimonial_data['woothemes_testimonials_content'];
+		$author_email = 	$testimonial_data['woothemes_testimonials_email'];
+		$author_url = 		$testimonial_data['woothemes_testimonials_website_url'];
+		$author_byline = 	$testimonial_data['woothemes_testimonials_byline'];
+		$blogname = 		wp_specialchars_decode( get_option('blogname'), ENT_QUOTES );
+
+		$message  = __( 'A new testimonial is waiting for your approval.', 'woothemes-testimonials' ) . "\r\n";
+		$message .= sprintf( __( 'Author: %1$s <%2$s>', 'woothemes-testimonials' ), $author_name, $author_email ) . "\r\n";
+		$message .= sprintf( __( 'E-mail: %s', 'woothemes-testimonials' ), $author_email ) . "\r\n";
+		$message .= sprintf( __( 'URL: %s', 'woothemes-testimonials' ), $author_url ) . "\r\n";
+		$message .= __( 'Testimonial: ', 'woothemes-testimonials' ) . "\r\n" . $content . "\r\n\r\n";
+
+		$message .= sprintf( __( 'Moderate it: %s', 'woothemes-testimonials' ),  admin_url( 'post.php?action=edit&post=' . $this->testimonial_id ) ) . "\r\n";
+
+		$subject = sprintf( __( '[%1$s] Please moderate a new testimonial from "%2$s"', 'woothemes-testimonials' ), $blogname, $author_name );
+
+		$headers = 'Content-Type: text/html\r\n';
+
+		// Filter the testimonial notification email content.
+		$message = apply_filters( 'woothemes_testimonials_notification_content', $message );
+
+		// Filter the testimonial notification email subject.
+		$subject = apply_filters( 'woothemes_testimonials_notification_subject', $subject );
+
+		// Filter the testimonial notification email headers.
+		$headers = apply_filters( 'woothemes_testimonials_notification_headers', $headers );
+
+		foreach ( $this->moderator_emails as $email ) {
+			wp_mail( $email, wp_specialchars_decode( $subject ), $message, $headers );
+		}
+
+	} // End notify_moderators()
 
 } // End Class
