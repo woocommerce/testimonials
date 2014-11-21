@@ -289,8 +289,10 @@ class Woothemes_Testimonials_Submission {
 							// Success
 							$this->generate_response( __( 'Your testimonial has been submitted and is now awaiting moderation.', 'woothemes-testimonials' ), 'success' );
 
-							// Send an email notification to the moderator(s).
-							$this->notify_moderators( $testimonial_data );
+							if( get_option( '_woothemes_testimonials_moderator_emails' ) != '' ) {
+								// Send an email notification to the moderator(s).
+								$this->notify_moderators( $testimonial_data );
+							}
 						} else {
 							// Failure
 							$this->generate_response( __( 'Your testimonial data seems to be correct, but something went wrong. Unfortunately your testimonial could not be submitted.', 'woothemes-testimonials' ), 'error' );
