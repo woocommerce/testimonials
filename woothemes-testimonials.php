@@ -18,6 +18,7 @@ require_once( 'classes/class-woothemes-testimonials-taxonomy.php' );
 require_once( 'woothemes-testimonials-template.php' );
 require_once( 'classes/class-woothemes-widget-testimonials.php' );
 require_once( 'classes/class-woothemes-testimonials-submission.php' );
+require_once( 'classes/class-woothemes-testimonials-captcha-integration.php' );
 global $woothemes_testimonials;
 $woothemes_testimonials = new Woothemes_Testimonials( __FILE__ );
 $woothemes_testimonials->version = '1.6.0';
