@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: testimonials-by-woothemes 1.6.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/testimonials-by-woothemes\n"
-"POT-Creation-Date: 2014-11-21 16:10+0100\n"
+"POT-Creation-Date: 2014-11-25 18:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,19 +13,30 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: classes/class-woothemes-testimonials-submission.php:84
-msgid "Add a testimonial"
+#: classes/class-woothemes-testimonials-captcha-integration.php:96
+msgid ""
+"In order to use the captcha verification you will have to install & activate "
+"the <a href=\"https://wordpress.org/plugins/captcha/\">Captcha</a> plugin."
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:95
+#: classes/class-woothemes-testimonials-captcha-integration.php:118
+msgid "Captcha"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-captcha-integration.php:135
+#: classes/class-woothemes-testimonials-submission.php:98
 msgid "<span class=\"required\">*</span>"
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:179
+#: classes/class-woothemes-testimonials-submission.php:80
+msgid "Add a testimonial"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:199
 msgid "Name"
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:185
+#: classes/class-woothemes-testimonials-submission.php:205
 #: classes/class-woothemes-testimonials.php:81
 #: classes/class-woothemes-testimonials.php:82
 #: classes/class-woothemes-testimonials.php:83
@@ -33,92 +44,93 @@ msgstr ""
 msgid "Testimonial"
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:191
+#: classes/class-woothemes-testimonials-submission.php:211
 msgid "E-mail address ( Gravatar )"
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:197
+#: classes/class-woothemes-testimonials-submission.php:217
 #: classes/class-woothemes-testimonials.php:358
 msgid "Byline"
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:203
+#: classes/class-woothemes-testimonials-submission.php:223
 msgid "Website"
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:209
+#: classes/class-woothemes-testimonials-submission.php:229
 msgid ""
 "Checking <small>( If you want to submit this form, do not enter anything in "
 "this field. )</small>"
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:215
-msgid "Submit for review"
+#: classes/class-woothemes-testimonials-submission.php:235
+msgid "Submit"
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:269
+#: classes/class-woothemes-testimonials-submission.php:284
 msgid ""
 "In order to submit a new testimonial, please leave the <strong>Checking</"
 "strong> field empty."
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:280
+#: classes/class-woothemes-testimonials-submission.php:296
 msgid "Your testimonial has been submitted and is now awaiting moderation."
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:287
+#: classes/class-woothemes-testimonials-submission.php:304
 msgid ""
 "Your testimonial data seems to be correct, but something went wrong. "
 "Unfortunately your testimonial could not be submitted."
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:292
+#: classes/class-woothemes-testimonials-submission.php:309
 msgid "Unfortunately your testimonial could not be submitted."
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:297
+#: classes/class-woothemes-testimonials-submission.php:314
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:455
+#: classes/class-woothemes-testimonials-submission.php:468
 msgid "The following fields are required: "
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:473
-msgid "Please make sure, you submit correct data in the following fields: "
+#: classes/class-woothemes-testimonials-submission.php:484
+msgid ""
+"Please make sure, you submit correct information in the following fields: "
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:561
+#: classes/class-woothemes-testimonials-submission.php:634
 msgid "A new testimonial is waiting for your approval."
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:562
+#: classes/class-woothemes-testimonials-submission.php:635
 #, php-format
-msgid "Author: %1$s <%2$s>"
+msgid "<h5>Author</h5> %1$s <%2$s>"
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:563
+#: classes/class-woothemes-testimonials-submission.php:636
 #, php-format
-msgid "E-mail: %s"
+msgid "<h5>E-mail</h5> %s"
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:564
+#: classes/class-woothemes-testimonials-submission.php:637
 #, php-format
-msgid "URL: %s"
+msgid "<h5>URL</h5> %s"
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:565
-msgid "Testimonial: "
+#: classes/class-woothemes-testimonials-submission.php:638
+msgid "<h5>Testimonial</h5>"
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:567
+#: classes/class-woothemes-testimonials-submission.php:640
 #, php-format
-msgid "Moderate it: %s"
+msgid "<h5>You can manage the submission here: %s</h5>"
 msgstr ""
 
-#: classes/class-woothemes-testimonials-submission.php:569
+#: classes/class-woothemes-testimonials-submission.php:642
 #, php-format
-msgid "[%1$s] Please moderate a new testimonial from \"%2$s\""
+msgid "[%1$s] Please moderate a new testimonial from \"%2$s\"."
 msgstr ""
 
 #: classes/class-woothemes-testimonials-taxonomy.php:71
