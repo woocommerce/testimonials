@@ -527,15 +527,17 @@ class Woothemes_Testimonials_Submission {
 	 * @return void
 	 */
 	public function initial_notice() {
-		$response_items = apply_filters( 'woothemes_testimonials_add_notice',  array() );
+		if( !isset ( $this->response ) ) {
+			$response_items = apply_filters( 'woothemes_testimonials_add_notice',  array() );
 
-		if( !empty( $response_items ) ) {
-			foreach( $response_items as $item ){
-				$this->add_response_item( $item['message'] );
-				$type = $item['type'];
+			if( !empty( $response_items ) ) {
+				foreach( $response_items as $item ){
+					$this->add_response_item( $item['message'] );
+					$type = $item['type'];
+				}
+
+				$this->generate_response( '', $type );
 			}
-
-			$this->generate_response( '', $type );
 		}
 	} // End initial_notice()
 
@@ -583,7 +585,7 @@ class Woothemes_Testimonials_Submission {
 		}
 
 		if( $testimonial_data['woothemes_testimonials_website_url'] != '') {
-			update_post_meta( $post_id, '_byline', $testimonial_data['woothemes_testimonials_website_url'] );
+			update_post_meta( $post_id, '_url', $testimonial_data['woothemes_testimonials_website_url'] );
 		}
 
 		return $post_id;
