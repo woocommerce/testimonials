@@ -344,7 +344,9 @@ class Woothemes_Testimonials_Submission {
 		$this->validate_email( $testimonial_data_raw );
 		$this->validate_url( $testimonial_data );
 
-		$this->errors = $this->validate_hooked_field_data( $fields, $testimonial_hooked_data_raw, $this->errors );
+		$hooked_data_errors = $this->validate_hooked_field_data( $fields, $testimonial_hooked_data_raw, $this->errors );
+
+		$this->errors = array_merge( $this->errors, $hooked_data_errors );
 
 		// All clear! No errors.
 		if ( !isset( $this->errors['missing_required'] ) && !isset( $this->errors['invalid_content'] ) ) {

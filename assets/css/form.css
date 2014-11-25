@@ -86,7 +86,6 @@
 }
 .woothemes-testimonials-notice:before {
   content: "";
-  height: 1.5em;
   width: 1.5em;
   display: block;
   position: absolute;
@@ -109,6 +108,7 @@
 }
 .woothemes-testimonials-notice ul {
   margin-bottom: 0 !important;
+  margin-left: 0 !important;
 }
 .woothemes-testimonials-notice li {
   list-style: none outside !important;
