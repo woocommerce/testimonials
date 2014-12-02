@@ -30,9 +30,10 @@ class Woothemes_Testimonials_Submission_Form {
 	public function __construct( $file ) {
 		$this->file = $file;
 		$this->assets_url = esc_url( trailingslashit( plugins_url( '/assets/', dirname( $file ) ) ) );
+		$this->errors = array();
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_submission_form_styles' ) );
-		add_action( 'woothemes_testimonials_process_shortcode_params', array( $this, 'process_notify_option' ) );
+		add_action( 'woothemes_testimonials_process_params', array( $this, 'process_notify_option' ) );
 		add_action( 'woothemes_testimonials_after_form_fields', array( $this, 'generate_nonce_field' ) );
 		add_action( 'init', array( $this, 'process_submission_form' ) );
 		add_action( 'woothemes_testimonials_before_form', array( $this, 'print_response' ) );

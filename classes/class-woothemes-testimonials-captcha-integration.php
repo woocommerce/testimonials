@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
  */
 class Woothemes_Testimonials_Captcha_Integration {
 	public $plugin_enabled;
+	public $captcha_option;
 
 	/**
 	 * Constructor function.
@@ -24,6 +25,8 @@ class Woothemes_Testimonials_Captcha_Integration {
 	 */
 	public function __construct( $file ) {
 		add_action( 'woothemes_testimonials_process_params', array( $this, 'process_captcha_option' ) );
+
+		$this->captcha_option = (bool)get_option( '_woothemes_testimonials_captcha' );
 
 		// Check if the plugin is active and if the "captcha" param was set in the shortcode.
 		$this->captcha_check();
@@ -43,7 +46,7 @@ class Woothemes_Testimonials_Captcha_Integration {
 	 * @return void
 	 */
 	public function captcha_check ( ) {
-			if( get_option( '_woothemes_testimonials_captcha' ) != '' && get_option( '_woothemes_testimonials_captcha' ) == 'true' ) {
+		if( get_option( '_woothemes_testimonials_captcha' ) != '' && $this->captcha_option == true ) {
 			// Captcha plugin integration.
 			if( function_exists( 'cptch_display_captcha_custom' ) && function_exists( 'cptch_check_custom_form' ) ) {
 				$this->plugin_enabled = true;
@@ -71,12 +74,10 @@ class Woothemes_Testimonials_Captcha_Integration {
 				add_filter( 'woothemes_testimonials_add_notice', array( $this, 'generate_plugin_inactive_notice' ) );
 			}
 
-			$captcha = get_option( '_woothemes_testimonials_captcha' );
-
-			if( $captcha == '' ) {
+			if( $this->captcha_option == '' ) {
 			    add_option( '_woothemes_testimonials_captcha', $args['captcha'] );
 
-		    } elseif ( $captcha != $args['captcha'] ) {
+		    } elseif ( $this->captcha_option != $args['captcha'] ) {
 			    update_option( '_woothemes_testimonials_captcha', $args['captcha'] );
 		    }
 
