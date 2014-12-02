@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
  * @author Danny
  * @since 1.6.0
  */
-class Woothemes_Testimonials_Submission {
+class Woothemes_Testimonials_Submission_Form {
 	private $assets_url;
 	private $file;
 	public $errors;
@@ -33,7 +33,6 @@ class Woothemes_Testimonials_Submission {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_submission_form_styles' ) );
 		add_action( 'woothemes_testimonials_process_shortcode_params', array( $this, 'process_notify_option' ) );
-		add_shortcode( 'woothemes_testimonials_form', array( $this, 'submission_form' ) );
 		add_action( 'woothemes_testimonials_after_form_fields', array( $this, 'generate_nonce_field' ) );
 		add_action( 'init', array( $this, 'process_submission_form' ) );
 		add_action( 'woothemes_testimonials_before_form', array( $this, 'print_response' ) );
@@ -54,136 +53,27 @@ class Woothemes_Testimonials_Submission {
 	} // End enqueue_submission_form_styles()
 
 	/**
-	 * Generate the testimonials submission form html.
+	 * Process submission form parameters.
 	 *
-	 * @param array $atts [woothemes_testimonials_form] shortcode parameters.
+	 * @param array $args submission form parameters.
 	 * @access public
 	 * @since 1.6.0
-	 * @return string Submission form html.
+	 * @return array
 	 */
-	public function submission_form ( $atts ) {
+	public function process_parameters( $args ) {
 
-		// Handle the shortcode parameters.
-		$this->submission_form_params( $atts );
+		$defaults = apply_filters( 'woothemes_testimonials_submission_form_default_args', array(
+			'notify' 			=> false,
+			'echo' 				=> true
+		) );
 
-		// Print an initial notice.
-		$this->initial_notice();
+		$args = wp_parse_args( $args, $defaults );
 
-		$html = '';
+		// Hook for handling the parameters.
+		do_action( 'woothemes_testimonials_process_params', $args );
 
-		ob_start();
-		do_action( 'woothemes_testimonials_before_form' );
-        $html .= ob_get_contents();
-        ob_end_clean();
-
-		$html .= '<div id="testimonials-submission">';
-		$html .= '<h2>' . __( 'Add a testimonial', 'woothemes-testimonials' ) . '</h2>';
-		$html .= '<form method="post" class="testimonials-submission">';
-
-		ob_start();
-		do_action( 'woothemes_testimonials_before_form_fields' );
-        $html .= ob_get_contents();
-        ob_end_clean();
-
-        $fields = $this->get_submission_form_fields();
-
-		foreach ( $fields as $field_name => $field_params ) {
-
-			if ( $field_params['type'] == 'external' ) {
-				$html .= '';
-				break;
-			}
-
-			if ( $field_params['required'] == true ) {
-				$required = __( '<span class="required">*</span>', 'woothemes-testimonials' );
-			} else {
-				$required = '';
-			}
-
-			if ( $field_params['type'] == 'submit' ) {
-
-				ob_start();
-				do_action( 'woothemes_testimonials_before_submit_field' );
-				$html .= ob_get_contents();
-				ob_end_clean();
-
-			}
-
-			if ( $field_params['type'] == 'hidden' ) {
-
-				$html .= '<input type="hidden" name="' . $field_name . '" id="' . $field_name . '" value="' . $field_params['value'] . '" />';
-				continue;
-
-			}
-
-			$html .= '<p class="form-row form-row-wide ' . $field_name . '">';
-
-				if ( $field_params['type'] == 'text' ) {
-
-					$html .= '<label for="' . $field_name . '">' . $field_params['label'] . $required . '</label>';
-					$html .= '<input type="text" class="input-text" name="' . $field_name . '" id="' . $field_name . '" />';
-
-				} elseif ( $field_params['type'] == 'textarea' ) {
-
-					$html .= '<label for="' . $field_name . '">' . $field_params['label'] . $required . '</label>';
-					$html .= '<textarea class="input-textarea" name="' . $field_name . '" rows="10" cols="40" id="' . $field_name . '"></textarea>';
-
-			    } elseif ( $field_params['type'] == 'email' ) {
-
-				    $html .= '<label for="' . $field_name . '">' . $field_params['label'] . $required . '</label>';
-					$html .= '<input type="text" class="input-email" name="' . $field_name . '" id="' . $field_name . '" />';
-
-			    } elseif ( $field_params['type'] == 'byline' ) {
-
-				    $html .= '<label for="' . $field_name . '">' . $field_params['label'] . $required . '</label>';
-					$html .= '<input type="text" class="input-byline" name="' . $field_name . '" id="' . $field_name . '" />';
-
-			    } elseif ( $field_params['type'] == 'website_url' ) {
-
-				    $html .= '<label for="' . $field_name . '">' . $field_params['label'] . $required . '</label>';
-				    $html .= '<input type="text" class="input-website-url" name="' . $field_name . '" id="' . $field_name . '" />';
-
-			    } elseif ( $field_params['type'] == 'checking' ) {
-
-				    $html .= '<label class="input-checking" for="' . $field_name . '">' . $field_params['label'] . $required . '</label>';
-				    $html .= '<input type="text" class="input-checking" name="' . $field_name . '" id="' . $field_name . '" />';
-
-			    } elseif ( $field_params['type'] == 'submit' ) {
-
-				    $html .= '<input type="submit" class="button" name="' . $field_name . '" id="' . $field_name . '" value="' . $field_params['label'] . '" />';
-
-			    }
-
-			$html .= '</p>';
-		}
-
-		ob_start();
-		do_action( 'woothemes_testimonials_after_form_fields' );
-        $html .= ob_get_contents();
-        ob_end_clean();
-
-		$html .= '</form>';
-		$html .= '</div>';
-
-		ob_start();
-		do_action( 'woothemes_testimonials_after_form' );
-        $html .= ob_get_contents();
-        ob_end_clean();
-
-	    return $html;
-	} // End submission_form()
-
-	/**
-	 * Hook for handling the shortcode parameters.
-	 *
-	 * @param array $atts [woothemes_testimonials_form] shortcode parameters.
-	 * @access public
-	 * @since 1.6.0
-	 * @return void
-	 */
-	public function submission_form_params ( $atts ) {
-		do_action( 'woothemes_testimonials_process_shortcode_params', $atts );
-	} // End submission_form_params()
+		return $args;
+	} // End process_parameters()
 
 	/**
 	 * Register form fields.
@@ -594,24 +484,24 @@ class Woothemes_Testimonials_Submission {
 	} // End add_testimonial()
 
 	/**
-	 * Handle the "notify" parameter in the form shortcode.
+	 * Handle the "notify" parameter in the form function.
 	 *
-	 * @param array $atts [woothemes_testimonials_form] shortcode parameters.
+	 * @param array $args submission_form function parameters.
 	 * @access public
 	 * @since 1.6.0
 	 * @return void
 	 */
-	public function process_notify_option ( $atts ) {
+	public function process_notify_option ( $args ) {
 		// If the 'notify' parameter is passed, the moderator(s) will receive email notifications.
-		if( isset( $atts['notify'] ) && $atts['notify'] != '' ) {
+		if( isset( $args['notify'] ) && $args['notify'] != '' ) {
 
 			$saved_emails = get_option( '_woothemes_testimonials_moderator_emails' );
 
 			// Save the email(s) as an option.
 			if( $saved_emails == '' ) {
-			    add_option( '_woothemes_testimonials_moderator_emails', $atts['notify'] );
-		    } elseif ( $saved_emails != $atts['notify'] ) {
-			    update_option( '_woothemes_testimonials_moderator_emails', $atts['notify'] );
+			    add_option( '_woothemes_testimonials_moderator_emails', $args['notify'] );
+		    } elseif ( $saved_emails != $args['notify'] ) {
+			    update_option( '_woothemes_testimonials_moderator_emails', $args['notify'] );
 		    }
 		} else {
 			delete_option( '_woothemes_testimonials_moderator_emails' );

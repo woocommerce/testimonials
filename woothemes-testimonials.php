@@ -15,10 +15,11 @@
 
 require_once( 'classes/class-woothemes-testimonials.php' );
 require_once( 'classes/class-woothemes-testimonials-taxonomy.php' );
-require_once( 'woothemes-testimonials-template.php' );
+require_once( 'templates/woothemes-testimonials-template.php' );
 require_once( 'classes/class-woothemes-widget-testimonials.php' );
-require_once( 'classes/class-woothemes-testimonials-submission.php' );
+require_once( 'classes/class-woothemes-testimonials-submission-form.php' );
 require_once( 'classes/class-woothemes-testimonials-captcha-integration.php' );
+require_once( 'templates/woothemes-testimonials-submission-form-template.php' );
 global $woothemes_testimonials;
 $woothemes_testimonials = new Woothemes_Testimonials( __FILE__ );
 $woothemes_testimonials->version = '1.6.0';

@@ -23,7 +23,7 @@ class Woothemes_Testimonials_Captcha_Integration {
 	 * @return void
 	 */
 	public function __construct( $file ) {
-		add_action( 'woothemes_testimonials_process_shortcode_params', array( $this, 'process_captcha_option' ) );
+		add_action( 'woothemes_testimonials_process_params', array( $this, 'process_captcha_option' ) );
 
 		// Check if the plugin is active and if the "captcha" param was set in the shortcode.
 		$this->captcha_check();
@@ -56,15 +56,17 @@ class Woothemes_Testimonials_Captcha_Integration {
 	/**
 	 * Handle the "captcha" parameter in the form shortcode.
 	 *
-	 * @param array $atts [woothemes_testimonials_form] shortcode parameters.
+	 * @param array $args submission_form function parameters.
 	 * @access public
 	 * @since 1.6.0
 	 * @return void
 	 */
-	public function process_captcha_option ( $atts ) {
-		if( isset( $atts['captcha'] ) && $atts['captcha'] != '' ) {
+	public function process_captcha_option ( $args ) {
+		if( isset( $args['captcha'] ) && $args['captcha'] != '' ) {
 
-			if ( $atts['captcha'] == true && $this->plugin_enabled == false ) {
+			$args['captcha'] = (bool)$args['captcha'];
+
+			if ( $args['captcha'] == true && $this->plugin_enabled == false ) {
 				// In the case the "captcha" param is set in the shortcode, but the plugin is inactive print notice.
 				add_filter( 'woothemes_testimonials_add_notice', array( $this, 'generate_plugin_inactive_notice' ) );
 			}
@@ -72,10 +74,10 @@ class Woothemes_Testimonials_Captcha_Integration {
 			$captcha = get_option( '_woothemes_testimonials_captcha' );
 
 			if( $captcha == '' ) {
-			    add_option( '_woothemes_testimonials_captcha', $atts['captcha'] );
+			    add_option( '_woothemes_testimonials_captcha', $args['captcha'] );
 
-		    } elseif ( $captcha != $atts['captcha'] ) {
-			    update_option( '_woothemes_testimonials_captcha', $atts['captcha'] );
+		    } elseif ( $captcha != $args['captcha'] ) {
+			    update_option( '_woothemes_testimonials_captcha', $args['captcha'] );
 		    }
 
 		} else {
