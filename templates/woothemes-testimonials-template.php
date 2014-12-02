@@ -85,7 +85,7 @@ function woothemes_testimonials ( $args = '' ) {
 			$html .= '<div class="testimonials-list">' . "\n";
 
 			// Begin templating logic.
-			$tpl = '<div id="quote-%%ID%%" class="%%CLASS%%" itemprop="review" itemscope itemtype="http://schema.org/Review"><blockquote class="testimonials-text" itemprop="reviewBody">%%TEXT%%</blockquote>%%AVATAR%% %%AUTHOR%%</div>';
+			$tpl = '<div id="quote-%%ID%%" class="%%CLASS%%" itemprop="review" itemscope itemtype="http://schema.org/Review"><span itemprop="itemreviewed" style="display: none;">' . get_bloginfo( 'name' ) . '</span><blockquote class="testimonials-text" itemprop="reviewBody">%%TEXT%%</blockquote>%%AVATAR%% %%AUTHOR%%</div>';
 			$tpl = apply_filters( 'woothemes_testimonials_item_template', $tpl, $args );
 
 			$count = 0;
