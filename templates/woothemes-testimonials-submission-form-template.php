@@ -155,7 +155,7 @@ function woothemes_testimonials_form_shortcode ( $atts ) {
 
 	$args = wp_parse_args( $defaults, $args );
 
-	$woothemes_testimonials_form->submission_form( $args );
+	return woothemes_testimonials_form( $args );
 } // End woothemes_testimonials_form_shortcode()
 }
 
