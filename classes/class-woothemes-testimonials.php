@@ -43,8 +43,7 @@ class Woothemes_Testimonials {
 		add_action( 'init', array( $this, 'register_post_type' ) );
 		add_action( 'init', array( $this, 'register_taxonomy' ) );
 		add_action( 'init', array( $this, 'support_jetpack_omnisearch' ) );
-
-		add_filter( 'jetpack_relatedposts_filter_headline', 'support_jetpack_relatedposts' );
+		add_filter( 'jetpack_relatedposts_filter_headline', array( $this, 'support_jetpack_relatedposts' )  );
 
 
 		if ( is_admin() ) {
@@ -591,6 +590,4 @@ class Woothemes_Testimonials {
     }
 
 } // End Class
-
-
 
