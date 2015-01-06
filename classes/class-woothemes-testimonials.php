@@ -62,6 +62,9 @@ class Woothemes_Testimonials {
 		}
 
 		add_action( 'after_setup_theme', array( $this, 'ensure_post_thumbnails_support' ) );
+
+		global $woothemes_testimonials_form;
+		$woothemes_testimonials_form = new Woothemes_Testimonials_Submission_Form( __FILE__ );
 	} // End __construct()
 
 	/**

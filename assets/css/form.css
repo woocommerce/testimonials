@@ -1,0 +1,133 @@
+.clear {
+  clear: both;
+}
+.nobr {
+  white-space: nowrap;
+}
+/**
+ * Objects
+ */
+/* Primary colour for buttons (alt) */
+/* Text on primary colour bg */
+/* Secondary buttons */
+/* Text on secondary colour bg */
+#testimonials-submission {
+  margin-top: 3.428571429rem;
+  max-width: 100%;
+  width: 40em;
+}
+#testimonials-submission h2 {
+  font-size: 16px;
+  font-size: 1.142857143rem;
+  line-height: 1.5;
+}
+#testimonials-submission form {
+  margin: 24px 0;
+  margin: 1.714285714rem 0;
+}
+#testimonials-submission form p {
+  margin: 11px 0;
+  margin: 0.785714286rem 0;
+}
+#testimonials-submission form label {
+  display: block;
+  line-height: 1.714285714;
+}
+#testimonials-submission form input[type="text"],
+#testimonials-submission form input[type="email"],
+#testimonials-submission form input[type="url"],
+#testimonials-submission form textarea {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 12px;
+  font-size: 0.857142857rem;
+  line-height: 1.714285714;
+  padding: 10px;
+  padding: 0.714285714rem;
+  width: 100%;
+}
+#testimonials-submission .required {
+  color: red;
+}
+#testimonials-submission .woothemes_testimonials_checking,
+#testimonials-submission .woothemes_testimonials_checking label,
+#testimonials-submission .woothemes_testimonials_checking input {
+  left: -9999px;
+  position: absolute;
+  top: -9999px;
+}
+.woothemes-testimonials-notice {
+  padding: 1em 1em 1em 3.5em !important;
+  margin: 0 0 2em !important;
+  position: relative;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background: #fcfbfc;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fcfbfc), to(#f7f6f7));
+  background: -webkit-linear-gradient(#fcfbfc, #f7f6f7);
+  background: -moz-linear-gradient(center top, #fcfbfc 0%, #f7f6f7 100%);
+  background: -moz-gradient(center top, #fcfbfc 0%, #f7f6f7 100%);
+  color: #5e5e5e;
+  text-shadow: 0 1px 0 #ffffff;
+  list-style: none outside !important;
+  *zoom: 1;
+  width: auto;
+  -webkit-box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.05), inset 0 -2px 30px rgba(0, 0, 0, 0.015), inset 0 1px 0 #ffffff, 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.05), inset 0 -2px 30px rgba(0, 0, 0, 0.015), inset 0 1px 0 #ffffff, 0 1px 2px rgba(0, 0, 0, 0.3);
+  border-top: 3px solid #1e85be;
+}
+.woothemes-testimonials-notice:before,
+.woothemes-testimonials-notice:after {
+  content: " ";
+  display: table;
+}
+.woothemes-testimonials-notice:after {
+  clear: both;
+}
+.woothemes-testimonials-notice:before {
+  content: "";
+  width: 1.5em;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 1em;
+  font-size: 1em;
+  font-family: sans-serif;
+  line-height: 1.5;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+  padding-top: 1em;
+  -webkit-border-bottom-left-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+  background-color: #1e85be;
+}
+.woothemes-testimonials-notice ul {
+  margin-bottom: 0 !important;
+  margin-left: 0 !important;
+}
+.woothemes-testimonials-notice li {
+  list-style: none outside !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+.woothemes-testimonials-notice.success {
+  border-top: 3px solid #8fae1b;
+}
+.woothemes-testimonials-notice.success:before {
+  background-color: #8fae1b;
+  content: "\2713";
+  font-weight: 700;
+}
+.woothemes-testimonials-notice.error {
+  border-top: 3px solid #b81c23;
+}
+.woothemes-testimonials-notice.error:before {
+  background-color: #b81c23;
+  content: "\00d7";
+  font-weight: 700;
+}

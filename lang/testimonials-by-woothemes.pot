@@ -1,16 +1,137 @@
-# Copyright (C) 2014 
-# This file is distributed under the same license as the  package.
+# Copyright (C) 2014
+# This file is distributed under the same license as the package.
 msgid ""
 msgstr ""
-"Project-Id-Version:  \n"
+"Project-Id-Version: testimonials-by-woothemes 1.6.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/testimonials-by-woothemes\n"
-"POT-Creation-Date: 2014-07-02 12:07:09+00:00\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2014-11-25 18:39+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: classes/class-woothemes-testimonials-captcha-integration.php:96
+msgid ""
+"In order to use the captcha verification you will have to install & activate "
+"the <a href=\"https://wordpress.org/plugins/captcha/\">Captcha</a> plugin."
+msgstr ""
+
+#: classes/class-woothemes-testimonials-captcha-integration.php:118
+msgid "Captcha"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-captcha-integration.php:135
+#: classes/class-woothemes-testimonials-submission.php:98
+msgid "<span class=\"required\">*</span>"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:80
+msgid "Add a testimonial"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:199
+msgid "Name"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:205
+#: classes/class-woothemes-testimonials.php:81
+#: classes/class-woothemes-testimonials.php:82
+#: classes/class-woothemes-testimonials.php:83
+#: classes/class-woothemes-testimonials.php:85
+msgid "Testimonial"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:211
+msgid "E-mail address ( Gravatar )"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:217
+#: classes/class-woothemes-testimonials.php:358
+msgid "Byline"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:223
+msgid "Website"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:229
+msgid ""
+"Checking <small>( If you want to submit this form, do not enter anything in "
+"this field. )</small>"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:235
+msgid "Submit"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:284
+msgid ""
+"In order to submit a new testimonial, please leave the <strong>Checking</"
+"strong> field empty."
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:296
+msgid "Your testimonial has been submitted and is now awaiting moderation."
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:304
+msgid ""
+"Your testimonial data seems to be correct, but something went wrong. "
+"Unfortunately your testimonial could not be submitted."
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:309
+msgid "Unfortunately your testimonial could not be submitted."
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:314
+msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:468
+msgid "The following fields are required: "
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:484
+msgid ""
+"Please make sure, you submit correct information in the following fields: "
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:634
+msgid "A new testimonial is waiting for your approval."
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:635
+#, php-format
+msgid "<h5>Author</h5> %1$s <%2$s>"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:636
+#, php-format
+msgid "<h5>E-mail</h5> %s"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:637
+#, php-format
+msgid "<h5>URL</h5> %s"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:638
+msgid "<h5>Testimonial</h5>"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:640
+#, php-format
+msgid "<h5>You can manage the submission here: %s</h5>"
+msgstr ""
+
+#: classes/class-woothemes-testimonials-submission.php:642
+#, php-format
+msgid "[%1$s] Please moderate a new testimonial from \"%2$s\"."
+msgstr ""
 
 #: classes/class-woothemes-testimonials-taxonomy.php:71
 msgid "Category"
@@ -21,197 +142,211 @@ msgid "Categories"
 msgstr ""
 
 #: classes/class-woothemes-testimonials-taxonomy.php:105
+#, php-format
 msgctxt "taxonomy general name"
 msgid "%s"
 msgstr ""
 
 #: classes/class-woothemes-testimonials-taxonomy.php:106
+#, php-format
 msgctxt "taxonomy singular name"
 msgid "%s"
 msgstr ""
 
 #: classes/class-woothemes-testimonials-taxonomy.php:107
+#, php-format
 msgid "Search %s"
 msgstr ""
 
 #: classes/class-woothemes-testimonials-taxonomy.php:108
-#: classes/class-woothemes-testimonials.php:82
+#: classes/class-woothemes-testimonials.php:84
+#, php-format
 msgid "All %s"
 msgstr ""
 
 #: classes/class-woothemes-testimonials-taxonomy.php:109
+#, php-format
 msgid "Parent %s"
 msgstr ""
 
 #: classes/class-woothemes-testimonials-taxonomy.php:110
+#, php-format
 msgid "Parent %s:"
 msgstr ""
 
 #: classes/class-woothemes-testimonials-taxonomy.php:111
-#: classes/class-woothemes-testimonials.php:80
+#: classes/class-woothemes-testimonials.php:82
+#, php-format
 msgid "Edit %s"
 msgstr ""
 
 #: classes/class-woothemes-testimonials-taxonomy.php:112
+#, php-format
 msgid "Update %s"
 msgstr ""
 
 #: classes/class-woothemes-testimonials-taxonomy.php:113
-#: classes/class-woothemes-testimonials.php:79
+#: classes/class-woothemes-testimonials.php:81
+#, php-format
 msgid "Add New %s"
 msgstr ""
 
 #: classes/class-woothemes-testimonials-taxonomy.php:114
+#, php-format
 msgid "New %s Name"
 msgstr ""
 
 #: classes/class-woothemes-testimonials-taxonomy.php:115
+#, php-format
 msgid "%s"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:76
+#: classes/class-woothemes-testimonials.php:78
 msgctxt "post type general name"
 msgid "Testimonials"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:77
+#: classes/class-woothemes-testimonials.php:79
 msgctxt "post type singular name"
 msgid "Testimonial"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:78
+#: classes/class-woothemes-testimonials.php:80
 msgctxt "testimonial"
 msgid "Add New"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:79
-#: classes/class-woothemes-testimonials.php:80
-#: classes/class-woothemes-testimonials.php:81
 #: classes/class-woothemes-testimonials.php:83
-msgid "Testimonial"
-msgstr ""
-
-#: classes/class-woothemes-testimonials.php:81
+#, php-format
 msgid "New %s"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:82
 #: classes/class-woothemes-testimonials.php:84
-#: classes/class-woothemes-testimonials.php:85
 #: classes/class-woothemes-testimonials.php:86
+#: classes/class-woothemes-testimonials.php:87
 #: classes/class-woothemes-testimonials.php:88
+#: classes/class-woothemes-testimonials.php:90
 #: classes/class-woothemes-widget-testimonials.php:44
 msgid "Testimonials"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:83
+#: classes/class-woothemes-testimonials.php:85
+#, php-format
 msgid "View %s"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:84
+#: classes/class-woothemes-testimonials.php:86
 msgid "Search %a"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:85
+#: classes/class-woothemes-testimonials.php:87
+#, php-format
 msgid "No %s Found"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:86
+#: classes/class-woothemes-testimonials.php:88
+#, php-format
 msgid "No %s Found In Trash"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:92
+#: classes/class-woothemes-testimonials.php:94
 msgctxt "single post url slug"
 msgid "testimonial"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:93
+#: classes/class-woothemes-testimonials.php:95
 msgctxt "post archive url slug"
 msgid "testimonials"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:163
+#: classes/class-woothemes-testimonials.php:165
 msgid "Image"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:197
+#: classes/class-woothemes-testimonials.php:199
+#, php-format
 msgid "Testimonial updated. %sView testimonial%s"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:198
+#: classes/class-woothemes-testimonials.php:200
 msgid "Custom field updated."
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:199
+#: classes/class-woothemes-testimonials.php:201
 msgid "Custom field deleted."
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:200
+#: classes/class-woothemes-testimonials.php:202
 msgid "Testimonial updated."
 msgstr ""
 
-#. translators: %s: date and time of the revision
-
-#: classes/class-woothemes-testimonials.php:202
+#: classes/class-woothemes-testimonials.php:204
+#, php-format
 msgid "Testimonial restored to revision from %s"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:203
+#: classes/class-woothemes-testimonials.php:205
+#, php-format
 msgid "Testimonial published. %sView testimonial%s"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:204
+#: classes/class-woothemes-testimonials.php:206
 msgid "Testimonial saved."
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:205
+#: classes/class-woothemes-testimonials.php:207
+#, php-format
 msgid "Testimonial submitted. %sPreview testimonial%s"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:206
+#: classes/class-woothemes-testimonials.php:208
+#, php-format
 msgid "Testimonial scheduled for: %1$s. %2$sPreview testimonial%3$s"
 msgstr ""
 
-#. translators: Publish box date format, see http:php.net/date
-
-#: classes/class-woothemes-testimonials.php:208
+#. //php.net/date
+#: classes/class-woothemes-testimonials.php:210
 msgid "M j, Y @ G:i"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:209
+#: classes/class-woothemes-testimonials.php:211
+#, php-format
 msgid "Testimonial draft updated. %sPreview testimonial%s"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:223
+#: classes/class-woothemes-testimonials.php:225
 msgid "Testimonial Details"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:322
+#: classes/class-woothemes-testimonials.php:324
 msgid "Enter the customer's name here"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:348
+#: classes/class-woothemes-testimonials.php:350
 msgid "Gravatar E-mail Address"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:349
-msgid "Enter in an e-mail address, to use a %sGravatar%s, instead of using the \"Featured Image\"."
+#: classes/class-woothemes-testimonials.php:351
+#, php-format
+msgid ""
+"Enter in an e-mail address, to use a %sGravatar%s, instead of using the "
+"\"Featured Image\"."
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:356
-msgid "Byline"
+#: classes/class-woothemes-testimonials.php:359
+msgid ""
+"Enter a byline for the customer giving this testimonial (for example: \"CEO "
+"of WooThemes\")."
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:357
-msgid "Enter a byline for the customer giving this testimonial (for example: \"CEO of WooThemes\")."
-msgstr ""
-
-#: classes/class-woothemes-testimonials.php:364
+#: classes/class-woothemes-testimonials.php:366
 msgid "URL"
 msgstr ""
 
-#: classes/class-woothemes-testimonials.php:365
-msgid "Enter a URL that applies to this customer (for example: http://woothemes.com/)."
+#: classes/class-woothemes-testimonials.php:367
+msgid ""
+"Enter a URL that applies to this customer (for example: http://woothemes."
+"com/)."
 msgstr ""
 
 #: classes/class-woothemes-widget-testimonials.php:42

@@ -1,10 +1,10 @@
 === Testimonials by WooThemes ===
-Contributors: woothemes, mattyza, jameskoster
+Contributors: woothemes, mattyza, jameskoster, danieldudzic
 Donate link: http://woothemes.com/
 Tags: testimonials, widget, shortcode, template-tag, feedback, customers
 Requires at least: 3.4.2
-Tested up to: 3.9.1
-Stable tag: 1.5.3
+Tested up to: 4.0.0
+Stable tag: 1.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,21 +56,43 @@ The various options for the "orderby" parameter are:
 
 The same arguments apply to the shortcode which is `[woothemes_testimonials]` and the template tag, which is `<?php woothemes_testimonials(); ?>`.
 
+= Submission Form =
+
+To display the testimonials submission form via a theme or a custom plugin, please use the following code:
+
+`<?php do_action( 'woothemes_testimonials_form' ); ?>`
+
+To add arguments to this, please use any of the following arguments, using the syntax provided below:
+
+* 'notify' => 'example@email.com, dummy@email.com' (email addresses that will receive notification messages)
+* 'captcha' => 'true' (enable the captcha)
+
+`<?php do_action( 'woothemes_testimonials_form', array( 'notify' => 'example@email.com', 'captcha' => 'true' ) ); ?>`
+
+The same arguments apply to the shortcode which is `[woothemes_testimonials_form]` and the template tag, which is `<?php woothemes_testimonials_form(); ?>`.
+
 == Usage Examples ==
 
 Adjusting the limit and image dimension, using the arguments in the three possible methods:
 
-do_action() call:
+do_action() calls:
 
 `<?php do_action( 'woothemes_testimonials', array( 'limit' => 10, 'size' => 100 ) ); ?>`
 
-woothemes_testimonials() template tag:
+`<?php do_action( 'woothemes_testimonials_form', array( 'notify' => 'example@email.com', 'captcha' => 'true' ) ); ?>`
+
+Template tags:
 
 `<?php woothemes_testimonials( array( 'limit' => 10, 'size' => 100 ) ); ?>`
 
-[woothemes_testimonials] shortcode:
+`<?php woothemes_testimonials_form( array( 'captcha' => 'true' ) ); ?>`
+
+
+Shortcode:
 
 `[woothemes_testimonials limit="10" size="100"]`
+
+`[woothemes_testimonials_form captcha="true" notify="dummy@email.com"]`
 
 == Installation ==
 
@@ -96,6 +118,9 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 1. The testimonials management screen within the WordPress admin.
 
 == Upgrade Notice =
+
+= 1.6.0 =
+* Adds the submission form functionality.
 
 = 1.4.1 =
 * Fixes display of testimonials when no "id" parameter is set.
@@ -129,6 +154,10 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * Initial release. Woo!
 
 == Changelog ==
+
+= 1.5.4 =
+* 2014-07-24
+* Tweak - Schema markup.
 
 = 1.5.3 =
 * 2014-07-03
