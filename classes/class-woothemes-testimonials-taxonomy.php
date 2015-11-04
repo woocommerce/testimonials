@@ -123,7 +123,7 @@ class Woothemes_Testimonials_Taxonomy {
 	 * @return  void
 	 */
 	public function register () {
-		register_taxonomy( esc_attr( $this->token ), esc_attr( $this->post_type ), (array)$this->args );
+		register_taxonomy( esc_attr( $this->token ), esc_attr( $this->post_type ), (array)apply_filters( 'woothemes_testimonials_taxonomy_args', $this->args ) );
 	} // End register()
 } // End Class
 ?>
