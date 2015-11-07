@@ -50,6 +50,7 @@ function woothemes_testimonials ( $args = '' ) {
 		'before_title' 		=> '<h2>',
 		'after_title' 		=> '</h2>',
 		'category' 			=> 0,
+		'quote_class'		=> ''
 	) );
 
 	$args = wp_parse_args( $args, $defaults );
@@ -99,6 +100,10 @@ function woothemes_testimonials ( $args = '' ) {
 				// Add a CSS class if no image is available.
 				if ( isset( $post->image ) && ( '' == $post->image ) ) {
 					$css_class .= ' no-image';
+				}
+
+				if ( isset( $args['quote_class'] ) && $args['quote_class'] != "" ) {
+					$css_class .= ' ' . $args['quote_class'];
 				}
 
 				setup_postdata( $post );
