@@ -1,9 +1,9 @@
 === Testimonials by WooThemes ===
 Contributors: woothemes, mattyza, jameskoster
-Donate link: http://woothemes.com/
-Tags: testimonials, widget, shortcode, template-tag, feedback, customers
+Donate link: https://woocommerce.com/
+Tags: testimonials, widget, shortcode, template-tag, feedback, customers, woocommerce, woothemes
 Requires at least: 3.4.2
-Tested up to: 3.9.1
+Tested up to: 4.7
 Stable tag: 1.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -14,9 +14,9 @@ Show off what your customers are saying about your business and how great they s
 
 "Testimonials by WooThemes" is a clean and easy-to-use testimonials management system for WordPress. Load in what your customers are saying about your business, and display the testimonials via a shortcode, widget or template tag on your website.
 
-Looking for a helping hand? [View plugin documentation](http://wordpress.org/plugins/testimonials-by-woothemes/other_notes/).
+Looking for a helping hand? [View plugin documentation](https://wordpress.org/plugins/testimonials-by-woothemes/other_notes/).
 
-Looking to contribute code to this plugin? [Fork the repository over at GitHub](http://github.com/woothemes/testimonials/).
+Looking to contribute code to this plugin? [Fork the repository over at GitHub](https://github.com/woocommerce/testimonials).
 (submit pull requests to the latest "release-" branch)
 
 == Usage ==
