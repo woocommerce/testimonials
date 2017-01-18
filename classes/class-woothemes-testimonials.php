@@ -365,7 +365,7 @@ class Woothemes_Testimonials {
 
 		$fields['url'] = array(
 		    'name' => __( 'URL', 'woothemes-testimonials' ),
-		    'description' => __( 'Enter a URL that applies to this customer (for example: http://woothemes.com/).', 'woothemes-testimonials' ),
+		    'description' => __( 'Enter a URL that applies to this customer (for example: https://woocommerce.com/).', 'woothemes-testimonials' ),
 		    'type' => 'url',
 		    'default' => '',
 		    'section' => 'info'
