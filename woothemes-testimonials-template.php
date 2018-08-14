@@ -289,7 +289,7 @@ function woothemes_testimonials_generate_ld_json( $post ) {
 				"@type": "Organization",
 				"name": "$organization",
 				"sameAs": "$organization_url",
-				"telephone": "+12122459600"
+				"telephone": "+5511975414069"
 			},
 			"reviewRating": {
 				"@type": "Rating",
