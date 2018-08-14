@@ -267,5 +267,7 @@ class Woothemes_Widget_Testimonials extends WP_Widget {
 } // End Class
 
 /* Register the widget. */
-add_action( 'widgets_init', create_function( '', 'return register_widget("Woothemes_Widget_Testimonials");' ), 1 );
+add_action( 'widgets_init', function() {
+	return register_widget( 'Woothemes_Widget_Testimonials' );
+}, 1 );
 ?>

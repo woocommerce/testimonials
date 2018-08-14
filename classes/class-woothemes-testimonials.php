@@ -17,7 +17,7 @@ class Woothemes_Testimonials {
 	private $assets_dir;
 	private $assets_url;
 	private $token;
-	public $version;
+	public  $version;
 	private $file;
 
 	/**
@@ -344,34 +344,34 @@ class Woothemes_Testimonials {
 	 * @since  1.0.0
 	 * @return array
 	 */
-	public function get_custom_fields_settings () {
+	public function get_custom_fields_settings() {
 		$fields = array();
 
 		$fields['gravatar_email'] = array(
-		    'name' => __( 'Gravatar E-mail Address', 'woothemes-testimonials' ),
-		    'description' => sprintf( __( 'Enter in an e-mail address, to use a %sGravatar%s, instead of using the "Featured Image".', 'woothemes-testimonials' ), '<a href="' . esc_url( 'http://gravatar.com/' ) . '" target="_blank">', '</a>' ),
-		    'type' => 'text',
-		    'default' => '',
-		    'section' => 'info'
+			'name'        => __( 'Gravatar E-mail Address', 'woothemes-testimonials' ),
+			'description' => sprintf( __( 'Enter in an e-mail address, to use a %sGravatar%s, instead of using the "Featured Image".', 'woothemes-testimonials' ), '<a href="' . esc_url( 'http://gravatar.com/' ) . '" target="_blank">', '</a>' ),
+			'type'        => 'text',
+			'default'     => '',
+			'section'     => 'info',
 		);
 
 		$fields['byline'] = array(
-		    'name' => __( 'Byline', 'woothemes-testimonials' ),
-		    'description' => __( 'Enter a byline for the customer giving this testimonial (for example: "CEO of WooThemes").', 'woothemes-testimonials' ),
-		    'type' => 'text',
-		    'default' => '',
-		    'section' => 'info'
+			'name'        => __( 'Byline', 'woothemes-testimonials' ),
+			'description' => __( 'Enter a byline for the customer giving this testimonial (for example: "CEO of WooThemes").', 'woothemes-testimonials' ),
+			'type'        => 'text',
+			'default'     => '',
+			'section'     => 'info',
 		);
 
 		$fields['url'] = array(
-		    'name' => __( 'URL', 'woothemes-testimonials' ),
-		    'description' => __( 'Enter a URL that applies to this customer (for example: http://woothemes.com/).', 'woothemes-testimonials' ),
-		    'type' => 'url',
-		    'default' => '',
-		    'section' => 'info'
+			'name'        => __( 'URL', 'woothemes-testimonials' ),
+			'description' => __( 'Enter a URL that applies to this customer (for example: http://woothemes.com/).', 'woothemes-testimonials' ),
+			'type'        => 'url',
+			'default'     => '',
+			'section'     => 'info',
 		);
 
-		return $fields;
+		return apply_filters( 'testimonials_get_custom_fields_settings', $fields );
 	} // End get_custom_fields_settings()
 
 	/**
