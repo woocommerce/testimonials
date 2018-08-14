@@ -84,11 +84,13 @@ function woothemes_testimonials ( $args = '' ) {
 			$html .= '<div class="testimonials-list">' . "\n";
 
 			// Begin templating logic.
-			$tpl = '<div id="quote-%%ID%%" class="%%CLASS%%" itemprop="review" itemscope itemtype="http://schema.org/Review"><blockquote class="testimonials-text" itemprop="reviewBody">%%TEXT%%</blockquote>%%AVATAR%% %%AUTHOR%%</div>';
+			$tpl = '<div id="quote-%%ID%%" class="%%CLASS%%"><blockquote class="testimonials-text">%%TEXT%%</blockquote>%%AVATAR%% %%AUTHOR%%</div>';
 			$tpl = apply_filters( 'woothemes_testimonials_item_template', $tpl, $args );
 
 			$count = 0;
-			foreach ( $query as $post ) { $count++;
+			foreach ( $query as $post ) {
+				$count++;
+
 				$template = $tpl;
 
 				$css_class = 'quote';
@@ -109,18 +111,18 @@ function woothemes_testimonials ( $args = '' ) {
 				$byline = $post->byline;
 				$author_url = esc_url( $post->url );
 				if ( ( $post_title != '' ) && true == $args['display_author'] ) {
-					$author .= '<cite class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">';
+					$author .= '<cite class="author">';
 
-					$author_name = '<span itemprop="name">' . $post_title . '</span>';
+					$author_name = '<span>' . $post_title . '</span>';
 
 					$author .= $author_name;
 
 					if ( isset( $byline ) && '' != $byline ) {
-						$author .= ' <span class="title" itemprop="jobTitle">' . $byline . '</span><!--/.title-->' . "\n";
+						$author .= ' <span class="title">' . $byline . '</span><!--/.title-->' . "\n";
 					}
 
 					if ( true == $args['display_url'] && '' != $author_url ) {
-						$author .= ' <span class="url"><a href="' . esc_url( $author_url ) . '" itemprop="url">' . apply_filters( 'woothemes_testimonials_author_link_text', $text = esc_url( $author_url ) ) . '</a></span><!--/.excerpt-->' . "\n";
+						$author .= ' <span class="url"><a href="' . esc_url( $author_url ) . '">' . apply_filters( 'woothemes_testimonials_author_link_text', $text = esc_url( $author_url ) ) . '</a></span><!--/.excerpt-->' . "\n";
 					}
 
 					$author .= '</cite><!--/.author-->' . "\n";
