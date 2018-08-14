@@ -57,7 +57,6 @@ function woothemes_testimonials ( $args = '' ) {
 	// Allow child themes/plugins to filter here.
 	$args = apply_filters( 'woothemes_testimonials_args', $args );
 	$html = '';
-
 	do_action( 'woothemes_testimonials_before', $args );
 
 		// The Query.
@@ -105,21 +104,23 @@ function woothemes_testimonials ( $args = '' ) {
 
 				$author = '';
 				$author_text = '';
-
 				// If we need to display the author, get the data.
-				if ( ( get_the_title( $post ) != '' ) && true == $args['display_author'] ) {
+				$post_title = get_the_title( $post );
+				$byline = $post->byline;
+				$author_url = esc_url( $post->url );
+				if ( ( $post_title != '' ) && true == $args['display_author'] ) {
 					$author .= '<cite class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">';
 
-					$author_name = '<span itemprop="name">' . get_the_title( $post ) . '</span>';
+					$author_name = '<span itemprop="name">' . $post_title . '</span>';
 
 					$author .= $author_name;
 
-					if ( isset( $post->byline ) && '' != $post->byline ) {
-						$author .= ' <span class="title" itemprop="jobTitle">' . $post->byline . '</span><!--/.title-->' . "\n";
+					if ( isset( $byline ) && '' != $byline ) {
+						$author .= ' <span class="title" itemprop="jobTitle">' . $byline . '</span><!--/.title-->' . "\n";
 					}
 
-					if ( true == $args['display_url'] && '' != $post->url ) {
-						$author .= ' <span class="url"><a href="' . esc_url( $post->url ) . '" itemprop="url">' . apply_filters( 'woothemes_testimonials_author_link_text', $text = esc_url( $post->url ) ) . '</a></span><!--/.excerpt-->' . "\n";
+					if ( true == $args['display_url'] && '' != $author_url ) {
+						$author .= ' <span class="url"><a href="' . esc_url( $author_url ) . '" itemprop="url">' . apply_filters( 'woothemes_testimonials_author_link_text', $text = esc_url( $author_url ) ) . '</a></span><!--/.excerpt-->' . "\n";
 					}
 
 					$author .= '</cite><!--/.author-->' . "\n";
@@ -134,8 +135,8 @@ function woothemes_testimonials ( $args = '' ) {
 				$template = str_replace( '%%ID%%', get_the_ID(), $template );
 				$template = str_replace( '%%CLASS%%', esc_attr( $css_class ), $template );
 
-				if ( isset( $post->image ) && ( '' != $post->image ) && true == $args['display_avatar'] && ( '' != $post->url ) ) {
-					$template = str_replace( '%%AVATAR%%', '<a href="' . esc_url( $post->url ) . '" class="avatar-link">' . $post->image . '</a>', $template );
+				if ( isset( $post->image ) && ( '' != $post->image ) && true == $args['display_avatar'] && ( '' != $author_url ) ) {
+					$template = str_replace( '%%AVATAR%%', '<a href="' . esc_url( $author_url ) . '" class="avatar-link">' . $post->image . '</a>', $template );
 				} elseif ( isset( $post->image ) && ( '' != $post->image ) && true == $args['display_avatar'] ) {
 					$template = str_replace( '%%AVATAR%%', $post->image, $template );
 				} else {
@@ -156,6 +157,7 @@ function woothemes_testimonials ( $args = '' ) {
 				if( is_numeric( $args['per_row'] ) && ( $args['per_row'] > 0 ) && ( 0 == $count % $args['per_row'] ) ) {
 					$html .= '<div class="fix"></div>' . "\n";
 				}
+				$html .= woothemes_testimonials_generate_ld_json( $post );
 			}
 
 			wp_reset_postdata();
@@ -175,7 +177,6 @@ function woothemes_testimonials ( $args = '' ) {
 
 		// Allow child themes/plugins to filter here.
 		$html = apply_filters( 'woothemes_testimonials_html', $html, $query, $args );
-
 		if ( $args['echo'] != true ) { return $html; }
 
 		// Should only run is "echo" is set to true.
@@ -194,7 +195,7 @@ if ( ! function_exists( 'woothemes_testimonials_shortcode' ) ) {
  * @return string          Output using the template tag.
  */
 function woothemes_testimonials_shortcode ( $atts, $content = null ) {
-	$args = (array)$atts;
+	$args = (array) $atts;
 
 	$defaults = array(
 		'limit' 			=> 5,
@@ -249,3 +250,73 @@ function woothemes_testimonials_content_default_filters () {
 
 add_action( 'woothemes_testimonials_before', 'woothemes_testimonials_content_default_filters' );
 }
+
+/**
+ * Generates LD+JSON markup for testimonials.
+ *
+ * Generates LD+JSON markup for testimonials.
+ *
+ * @since  1.6.0
+ * @param WP_Post $post A WP_Post object.
+ * @return string $ld_json_output The JSON+LD markup.
+ */
+function woothemes_testimonials_generate_ld_json( $post ) {
+		$byline = get_post_meta( $post->ID, '_byline', true );
+		$author_url = esc_url( get_post_meta( $post->ID, '_url', true ) );
+	$post_title = get_the_title( $post );
+	$post_permalink = esc_url( get_post_permalink( $post->ID ) );
+	$post_published_date = str_replace( ' ', 'T', $post->post_date_gmt );
+	$language = get_bloginfo( 'language' );
+	$organization = get_bloginfo( 'name' );
+	$organization_url = esc_url( get_bloginfo( 'url' ) );
+	$content = wp_strip_all_tags( apply_filters( 'the_content', $post->post_content ), true );
+	$ld_json_output = <<<EOD
+		<script type="application/ld+json">
+		{
+			"@context": "http://schema.org",
+			"@type": "Review",
+			"author": {
+				"@type": "Person",
+				"name": "$post_title",
+				"jobTitle": "$byline",
+				"sameAs": "$author_url"
+			},
+			"url": "$post_permalink",
+			"datePublished": "$post_published_date",
+			"description": "$content",
+			"inLanguage": "$language",
+			"itemReviewed": {
+				"@type": "Organization",
+				"name": "$organization",
+				"sameAs": "$organization_url",
+				"telephone": "+12122459600"
+			},
+			"reviewRating": {
+				"@type": "Rating",
+				"worstRating": 1,
+				"bestRating": 5,
+				"ratingValue": 5
+			}
+		}
+		</script>
+EOD;
+	return $ld_json_output;
+}
+
+/**
+ * Adds LD+JSON markup for single testimonials.
+ *
+ * Adds LD+JSON markup for single testimonials.
+ *
+ * @since  1.6.0
+ * @param WP_Post $post A WP_Post object.
+ * @return string $ld_json_output The JSON+LD markup.
+ */
+function woothemes_testimonials_single_post_ld_json() {
+	if ( ! is_singular( 'testimonial' ) ) {
+		return;
+	}
+	global $post;
+	echo woothemes_testimonials_generate_ld_json( $post ); // WPCS: XSS ok.
+}
+add_action( 'wp_head', 'woothemes_testimonials_single_post_ld_json' );
