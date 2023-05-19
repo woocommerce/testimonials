@@ -84,7 +84,7 @@ class Woothemes_Testimonials {
 			'new_item' => sprintf( __( 'New %s', 'woothemes-testimonials' ), __( 'Testimonial', 'woothemes-testimonials' ) ),
 			'all_items' => sprintf( __( 'All %s', 'woothemes-testimonials' ), __( 'Testimonials', 'woothemes-testimonials' ) ),
 			'view_item' => sprintf( __( 'View %s', 'woothemes-testimonials' ), __( 'Testimonial', 'woothemes-testimonials' ) ),
-			'search_items' => sprintf( __( 'Search %a', 'woothemes-testimonials' ), __( 'Testimonials', 'woothemes-testimonials' ) ),
+			'search_items' => sprintf( __( 'Search %s', 'woothemes-testimonials' ), __( 'Testimonials', 'woothemes-testimonials' ) ),
 			'not_found' =>  sprintf( __( 'No %s Found', 'woothemes-testimonials' ), __( 'Testimonials', 'woothemes-testimonials' ) ),
 			'not_found_in_trash' => sprintf( __( 'No %s Found In Trash', 'woothemes-testimonials' ), __( 'Testimonials', 'woothemes-testimonials' ) ),
 			'parent_item_colon' => '',
